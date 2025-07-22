@@ -7,6 +7,9 @@ import { NaiveUiResolver } from 'unplugin-vue-components/resolvers'
 
 export default defineConfig({
   base: '/endless-winter/',
+  build: {
+    outDir: 'docs'
+  },
   plugins: [
     vue(),
     vueDevTools(),
