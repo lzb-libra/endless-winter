@@ -5,7 +5,6 @@ import About from '../views/About.vue'
 
 const routes = [
   { path: '/', redirect: '/hero' },
-  { path: '/endless-winter/', redirect: '/hero' },
   { path: '/hero', name: 'Hero', component: Hero },
   { path: '/pet', name: 'Pet', component: Pet },
   { path: '/about', name: 'About', component: About },
