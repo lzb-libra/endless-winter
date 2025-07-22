@@ -4,7 +4,7 @@ import Pet from '../views/Pet.vue'
 import About from '../views/About.vue'
 
 const routes = [
-  { path: '/endless-winter/', redirect: '/hero' },
+  { path: '/endless-winter/', redirect: '/endless-winter/hero' },
   { path: '/endless-winter/hero', name: 'Hero', component: Hero },
   { path: '/endless-winter/pet', name: 'Pet', component: Pet },
   { path: '/endless-winter/about', name: 'About', component: About },
