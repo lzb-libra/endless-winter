@@ -4,7 +4,7 @@ import Pet from '../views/Pet.vue'
 import About from '../views/About.vue'
 
 const routes = [
-  { path: '/', redirect: '/hero' },
+  { path: '/', name: 'Hero', component: Hero },
   { path: '/hero', name: 'Hero', component: Hero },
   { path: '/pet', name: 'Pet', component: Pet },
   { path: '/about', name: 'About', component: About },
