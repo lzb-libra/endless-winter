@@ -4,14 +4,14 @@ import Pet from '../views/Pet.vue'
 import About from '../views/About.vue'
 
 const routes = [
-  { path: '/', name: 'Hero', component: Hero },
+  { path: '/', redirect: '/hero' },
   { path: '/hero', name: 'Hero', component: Hero },
   { path: '/pet', name: 'Pet', component: Pet },
   { path: '/about', name: 'About', component: About },
 ]
 
 const router = createRouter({
-  history: createWebHistory(),
+  history: createWebHistory('/endless-winter/'),
   routes,
 })
 
