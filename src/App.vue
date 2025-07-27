@@ -91,8 +91,5 @@ onMounted(() => {
 .main-content {
 	margin-top: 15px;
 	margin-bottom: 20px;
-	/* max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 20px; */
 }
 </style>
