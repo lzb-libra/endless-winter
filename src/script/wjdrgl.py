@@ -1,13 +1,17 @@
 import os
 import requests
 from bs4 import BeautifulSoup
+from urllib.parse import quote
 
-def analyzingWebSite(url):
+def analyzingWebSite(name, url, save_dir):
+    print(f'{name}')
+    encodedName = quote(name)
+
     # 发送请求
     headers = {
         "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64)"
     }
-    response = requests.get(url, headers=headers)
+    response = requests.get(url + encodedName + "/", headers=headers)
 
     if response.status_code == 200:
         # 解析 HTML
@@ -27,54 +31,54 @@ def analyzingWebSite(url):
 
         finish_div = finish_div.find_all("div")
         finish_div = finish_div[0]
-        # print(finish_div.prettify())
 
         finish_div = finish_div.find_all("div", recursive=False)
-        for (index, item) in enumerate(finish_div):
-            print(f"索引 {index}:", item.prettify())
 
-        # print("TX--------------------------------")
-        # tx_skills = finish_div[0]
-        # tx_skills = tx_skills.find_all("div", class_="row")
-        # for txSkill in tx_skills:
-        #     print(txSkill.prettify())
+        # print("TX--------------------------------\r\n")
+        tx_skills = finish_div[0]
+        tx_skills = tx_skills.find_all("div", class_="row")
+        for index, txSkill in enumerate(tx_skills):
+            analysisSkill(txSkill, "tx", index, save_dir)
 
-        #     # 下载图片
-        #     img = txSkill.find("img")
-        #     download_img(img.get("src"))
-
-        #     # 获取名称
-        #     label = txSkill.find("h5")
-        #     print(label.get_text(strip=True))
-            
-        #     desc = txSkill.find("p")
-        #     print(desc.get_text(strip=True))
-
-        # print("YZ--------------------------------")
-        # yz_skills = finish_div[1]
-        # yz_skills = yz_skills.find_all("div", class_="row", recursive=False)
-        # for yzSkill in yz_skills:
-        #     # print(yzSkill.prettify())
-
-        #     # 下载图片
-        #     img = yzSkill.find("img")
-        #     download_img(img.get("src"))
-
-        #     # 获取名称
-        #     label = yzSkill.find("h5")
-        #     print(label.get_text(strip=True))
-            
-        #     desc = yzSkill.find("p")
-        #     print(desc.get_text(strip=True))
+        # print("YZ--------------------------------\r\n")
+        yz_skills = finish_div[1]
+        yz_skills = yz_skills.find_all("div", class_="row")
+        for index, yzSkill in enumerate(yz_skills):
+            analysisSkill(yzSkill, "yz", index, save_dir)
     else:
         print("请求失败：", response.status_code)
 
-def download_img(url):
+def analysisSkill(skill, type, index, save_dir):
+    # print(skill.prettify())
+
+    # 下载图片
+    img = skill.find("img")
+    download_img(img.get("src"), type + "_" + str(index + 1) + ".png", save_dir)
+
+    # 获取名称
+    label = skill.find("h5")
+    skill_name = label.get_text(strip=True)
+    # print(skill_name)
+    
+    desc = skill.find("p")
+    skill_desc = desc.get_text("\n", strip=True).split("\n")[0]
+    skill_desc = skill_desc.replace("\n", "").replace("\r", "")
+    # print(skill_desc)
+
+    print(f'{type}_{index+1}: {{ label: "{skill_name}", desc: "{skill_desc}" }},')
+    # print('')
+
+def download_img(url, file_name, save_dir):
+    # 创建目录（如果不存在）
+    os.makedirs(save_dir, exist_ok=True)
+
+    # 拼接完整路径
+    file_path = os.path.join(save_dir, file_name)
+
     response = requests.get(url, stream=True)
     if response.status_code == 200:
         # 保存到本地文件
-        file_name = os.path.basename(url)  # 自动取文件名
-        with open(file_name, "wb") as f:
+        with open(file_path, "wb") as f:
             for chunk in response.iter_content(1024):  # 分块写入
                 f.write(chunk)
         # print(f"下载完成: {file_name}")
@@ -93,4 +97,8 @@ def upload_file(token, file_path):
 
 
 if __name__ == "__main__":
-    analyzingWebSite("https://wjdrgl.centurygames.cn/heroes/%e5%b0%a4%e9%87%91/")
+    analyzingWebSite(
+        "布拉德利", 
+        "https://wjdrgl.centurygames.cn/heroes/",
+        "D:/workstation/MyProjects/endless-winter/public/images/heros/lore/S7/BuLaDeLi"
+    )
