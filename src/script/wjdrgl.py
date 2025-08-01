@@ -1,5 +1,4 @@
-import os, re
-import requests
+import os, re, platform, requests
 from bs4 import BeautifulSoup
 from urllib.parse import quote
 
@@ -187,6 +186,10 @@ def download_img(url, file_name, save_dir):
         print("下载失败:", response.status_code)
 
 if __name__ == "__main__":
+    save_dir = "D:/workstation/MyProjects/endless-winter/public/images/heros/"
+    if platform.system() == "Darwin":
+        save_dir = ""
+
     heros = [
         {"name": "史密斯", "addr": "rare/ShiMiSi"},
         {"name": "尤金", "addr": "rare/YouJin"},
@@ -232,11 +235,11 @@ if __name__ == "__main__":
         {"name": "哥頓", "addr": "lore/S7/GeDun"},
         {"name": "布拉德利", "addr": "lore/S7/BuLaDeLi"},
     ]
-
+    
     for item in heros:
         analyzingWebSite(
             item["name"], 
             "https://wjdrgl.centurygames.cn/heroes/",
-            "D:/workstation/MyProjects/endless-winter/public/images/heros/" + item["addr"]
+            save_dir + item["addr"]
         )
         print("----------------------------------------------------------------------------------------------------------")
