@@ -20,61 +20,66 @@
 		</n-flex>
 	</div>
 
-	<n-modal v-model:show="showModal" transform-origin="center" @after-leave="onAfterLeave" style="width: 1650px;">
+	<n-modal v-model:show="showModal" transform-origin="center" @after-leave="onAfterLeave" style="width: 1650px; height: 100vh;">
 		<div style="display: flex;">
-			<n-card style="width: 500px;">
+			<n-card style="width: 600px; padding-top: 30px;">
 				<div style="display: flex; flex-direction: column; align-items: center">
 					<!-- 立绘 -->
 					<n-badge
 						:value="showModalInfo.level === 'rare' ? '稀有' : showModalInfo.level === 'epic' ? '传说' : showModalInfo.level">
-						<n-image object-fit="contain" :height="showModalInfo.height"
+						<n-image
+							object-fit="contain" 
+							:height="300"
+							:show-toolbar = "false"
+							:preview-disabled="true"
 							:src="renderPortrait(showModalInfo)"
-							style="display: flex; justify-content: center; margin-top: 20px; margin-bottom: 10px"
-							preview-disabled />
+							style="display: flex; justify-content: center; margin-top: 20px; margin-bottom: 10px" />
 					</n-badge>
-					<!-- 名称 -->
-					<h2>{{ showModalInfo.name }}</h2>
-					<!-- 兵种、类型、天赋 -->
-					<div style="display: flex; align-items: center; padding-bottom: 20px">
-						<img v-if="showModalInfo.as === 1" src="/images/as-hypaspist.png" style="width: 30px" />
-						<img v-else-if="showModalInfo.as === 2" src="/images/as-spearman.png" style="width: 30px" />
-						<img v-else="showModalInfo.as === 3" src="/images/as-archers.png" style="width: 30px" />
-						<img v-if="showModalInfo.type == 1" src="/images/type-output.png" style="width: 30px" />
-						<img v-else="showModalInfo.type == 1" src="/images/type-develop.png" style="width: 30px" />
-						<div v-if="showModalInfo.talent" style="padding-top: 2px">
-							<n-popover trigger="hover">
-								<template #trigger>
-									<img :src="renderTalent()" style="width: 30px; cursor: pointer" />
-								</template>
-								<span>
-									<p style="font-weight: bold; font-size: 1.25em">{{ showModalInfo.talent.name }}
-									</p>
-									<p>{{ showModalInfo.talent.desc }}</p>
-								</span>
-							</n-popover>
+					<div style="display: flex; align-items: center;">
+						<!-- 名称 -->
+						<h2>{{ showModalInfo.name }}</h2>
+						<!-- 兵种、类型、天赋 -->
+						<div style="display: flex; align-items: center; margin-left: 5px;">
+							<img v-if="showModalInfo.as === 1" src="/images/as-hypaspist.png" style="width: 30px" />
+							<img v-else-if="showModalInfo.as === 2" src="/images/as-spearman.png" style="width: 30px" />
+							<img v-else="showModalInfo.as === 3" src="/images/as-archers.png" style="width: 30px" />
+							<img v-if="showModalInfo.type == 1" src="/images/type-output.png" style="width: 30px" />
+							<img v-else="showModalInfo.type == 1" src="/images/type-develop.png" style="width: 30px" />
+							<div v-if="showModalInfo.talent" style="padding-top: 7px">
+								<n-popover trigger="hover">
+									<template #trigger>
+										<img :src="renderTalent()" style="width: 30px; cursor: pointer" />
+									</template>
+									<span>
+										<p style="font-weight: bold; font-size: 1.25em">{{ showModalInfo.talent.name }}
+										</p>
+										<p>{{ showModalInfo.talent.desc }}</p>
+									</span>
+								</n-popover>
+							</div>
 						</div>
 					</div>
 				</div>
-				<!-- 英雄来源 -->
-				<div v-if="showModalInfo.source" style="display: flex; flex: 1">
-					<div style="margin-right: 10px; width: 100px">
-						<strong>英雄来源: </strong>
-					</div>
-					<div>
-						<n-space>
-							<n-tag v-for="(item, index) in showModalInfo.source" type="success">{{ item
-							}}</n-tag>
-						</n-space>
-					</div>
-				</div>
-				<div>
-					<h3>英雄故事</h3>
-					<div v-html="showModalInfo.story"></div>
-				</div>
+				<div style="padding-top: 20px;" v-html="showModalInfo.story"></div>
 			</n-card>
 			<n-card style="width: 1000px; flex: 1;" :bordered="false" size="huge" role="dialog" aria-modal="true">
+				<!-- 英雄来源 -->
+				<div style="display: flex; justify-content: space-between;">
+					<div v-if="showModalInfo.source" style="flex: 1; padding-right: 20px;">
+						<h3>英雄来源</h3>
+						<div>
+							<n-space>
+								<n-tag v-for="(item, index) in showModalInfo.source" type="success">{{ item }}</n-tag>
+							</n-space>
+						</div>
+					</div>
+					<video v-if="showModalInfo.hasVideo" style="height: 250px; width: 500px;" :src="renderVideo()" controls></video>
+				</div>
+				
 				<!-- 英雄技能 -->
 				<div v-show="showModalInfo.skill">
+					<n-divider />
+
 					<h3>英雄技能</h3>
 					<di style="display: flex">
 						<n-card title="探险" size="small" :bordered="false">
@@ -87,7 +92,7 @@
 								<div :class="renderSkillClass(1, 1)"
 									:style="{ backgroundImage: `url(${renderTxImg()})` }">
 								</div>
-								<div style="flex: 1; padding-left: 10px">
+								<div style="flex: 1; padding-left: 20px">
 									<div style="font-size: 1.25em; font-weight: bold">{{ showModalInfo.skill.tx_1.label
 									}}
 									</div>
@@ -98,7 +103,7 @@
 								<div :class="renderSkillClass(2, 1)"
 									:style="{ backgroundImage: `url(${renderTxImg()})` }">
 								</div>
-								<div style="flex: 1; padding-left: 10px">
+								<div style="flex: 1; padding-left: 20px">
 									<div style="font-size: 1.25em; font-weight: bold">{{ showModalInfo.skill.tx_2.label
 									}}
 									</div>
@@ -109,7 +114,7 @@
 								<div :class="renderSkillClass(3, 1)"
 									:style="{ backgroundImage: `url(${renderTxImg()})` }">
 								</div>
-								<div style="flex: 1; padding-left: 10px">
+								<div style="flex: 1; padding-left: 20px">
 									<div style="font-size: 1.25em; font-weight: bold">{{ showModalInfo.skill.tx_3.label
 									}}
 									</div>
@@ -136,7 +141,7 @@
 								<div :class="renderSkillClass(1, 2)"
 									:style="{ backgroundImage: `url(${renderYzImg()})` }">
 								</div>
-								<div style="flex: 1; padding-left: 10px">
+								<div style="flex: 1; padding-left: 20px">
 									<div style="font-size: 1.25em; font-weight: bold">{{ showModalInfo.skill.yz_1.label
 									}}
 									</div>
@@ -147,7 +152,7 @@
 								<div :class="renderSkillClass(2, 2)"
 									:style="{ backgroundImage: `url(${renderYzImg()})` }">
 								</div>
-								<div style="flex: 1; padding-left: 10px">
+								<div style="flex: 1; padding-left: 20px">
 									<div style="font-size: 1.25em; font-weight: bold">{{ showModalInfo.skill.yz_2.label
 									}}
 									</div>
@@ -158,7 +163,7 @@
 								<div :class="renderSkillClass(3, 2)"
 									:style="{ backgroundImage: `url(${renderYzImg()})` }">
 								</div>
-								<div style="flex: 1; padding-left: 10px">
+								<div style="flex: 1; padding-left: 20px">
 									<div style="font-size: 1.25em; font-weight: bold">{{ showModalInfo.skill.yz_3.label
 									}}
 									</div>
@@ -176,9 +181,12 @@
 					<h3>专属装备</h3>
 					<div style="display: flex">
 						<div>
-							<n-image object-fit="contain" width="100" height="100" :src="renderZwImg()"
-								preview-disabled />
-							<div style="text-align: center; font-weight: bold">{{ showModalInfo.weapon.name }}</div>
+							<n-image object-fit="contain" width="100" height="100" :src="renderZwImg()" preview-disabled />
+							<div style="text-align: center; font-weight: bold; padding-top: 3px;">{{ showModalInfo.weapon.name }}</div>
+							<div v-if="showModalInfo.weapon.strength" style="display: flex; align-items: center; justify-content: center; padding-top: 3px;">
+								<n-image object-fit="contain" width="15" height="15" src="/images/strength.png" preview-disabled />
+								<span style="padding-left: 3px;">{{ showModalInfo.weapon.strength }}</span>
+							</div>
 						</div>
 						<div style="padding-left: 20px; width: 300px">
 							<div>英雄攻击: {{ showModalInfo.weapon.data[0] }}</div>
@@ -200,7 +208,7 @@
 										preview-disabled />
 									<div style="text-align: center">探险</div>
 								</div>
-								<div style="padding-left: 10px">
+								<div style="padding-left: 20px">
 									<div style="font-weight: bold">{{ showModalInfo.weapon.tx.name }}</div>
 									<div>{{ showModalInfo.weapon.tx.desc }}</div>
 								</div>
@@ -211,7 +219,7 @@
 										preview-disabled />
 									<div style="text-align: center">远征</div>
 								</div>
-								<div style="padding-left: 10px">
+								<div style="padding-left: 20px">
 									<div style="font-weight: bold">{{ showModalInfo.weapon.yz.name }}</div>
 									<div>{{ showModalInfo.weapon.yz.desc }}</div>
 								</div>
@@ -261,6 +269,11 @@ const renderPortrait = obj => {
 	const imgUrl = `/images/heros/${obj.addr}/portrait.png`;
 	return new URL(imgUrl, import.meta.url).href;
 };
+
+const renderVideo = () => {
+	const imgUrl = `/video/heros/${showModalInfo.value.addr}/cg.mp4`;
+	return new URL(imgUrl, import.meta.url).href;
+}
 
 const renderTalent = () => {
 	const imgUrl = `/images/heros/${showModalInfo.value.addr}/tf.png`;

@@ -188,7 +188,7 @@ def download_img(url, file_name, save_dir):
 if __name__ == "__main__":
     save_dir = "D:/workstation/MyProjects/endless-winter/public/images/heros/"
     if platform.system() == "Darwin":
-        save_dir = ""
+        save_dir = "/Users/lizhibao/workspace/projects/GitHub/endless-winter/public/images/heros/"
 
     heros = [
         {"name": "史密斯", "addr": "rare/ShiMiSi"},
