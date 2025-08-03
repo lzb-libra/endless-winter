@@ -204,7 +204,7 @@
 							style="padding-left: 40px; display: flex; flex-direction: column; justify-content: space-between">
 							<div style="display: flex">
 								<div>
-									<n-image object-fit="contain" width="50" height="50" :src="renderZwTxImg()"
+									<n-image object-fit="contain" width="80" height="80" :src="renderZwTxImg()"
 										preview-disabled />
 									<div style="text-align: center">探险</div>
 								</div>
@@ -215,7 +215,7 @@
 							</div>
 							<div style="display: flex">
 								<div>
-									<n-image object-fit="contain" width="50" height="50" :src="renderZwYzImg()"
+									<n-image object-fit="contain" width="80" height="80" :src="renderZwYzImg()"
 										preview-disabled />
 									<div style="text-align: center">远征</div>
 								</div>

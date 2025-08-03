@@ -26,6 +26,15 @@
     {
         "key": "lian_meng_zong_dong_yuan",
         "name": "联盟总动员"
+    },
+    {
+        "key": "lian_meng_zong_dong_yuan",
+        "name": "联盟总动员"
+    },
+    {
+        "key": "shuang_long_ba_zhu",
+        "name": "霜龙霸主",
+        "rule": {},
+        "reward": ""
     }
-    
 ]
