@@ -75,7 +75,7 @@ const menuOptions = [
 
 onMounted(() => {
 	const pathname = window.location.pathname;
-	activeKey.value = pathname.replace("/", "");
+	activeKey.value = pathname.replace("/assistant/", "");
 });
 </script>
 

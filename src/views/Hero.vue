@@ -13,25 +13,22 @@
 					<img v-if="obj.as === 1" src="/images/as-hypaspist.png" style="width: 30px" />
 					<img v-else-if="obj.as === 2" src="/images/as-spearman.png" style="width: 30px" />
 					<img v-else="obj.as === 3" src="/images/as-archers.png" style="width: 30px" />
-					<img v-if="obj.type == 1" src="/images/type-output.png" style="width: 30px" />
-					<img v-else="obj.type == 1" src="/images/type-develop.png" style="width: 30px" />
+					<img v-if="obj.type === 1" src="/images/type-output.png" style="width: 30px" />
+					<img v-else="obj.type === 1" src="/images/type-develop.png" style="width: 30px" />
 				</template>
 			</n-card>
 		</n-flex>
 	</div>
 
-	<n-modal v-model:show="showModal" transform-origin="center" @after-leave="onAfterLeave" style="width: 1650px; height: 100vh;">
+	<n-modal v-model:show="showModal" transform-origin="center" @after-leave="onAfterLeave"
+		style="width: 1650px; height: 100vh;">
 		<div style="display: flex;">
 			<n-card style="width: 600px; padding-top: 30px;">
 				<div style="display: flex; flex-direction: column; align-items: center">
 					<!-- 立绘 -->
 					<n-badge
 						:value="showModalInfo.level === 'rare' ? '稀有' : showModalInfo.level === 'epic' ? '传说' : showModalInfo.level">
-						<n-image
-							object-fit="contain" 
-							:height="300"
-							:show-toolbar = "false"
-							:preview-disabled="true"
+						<n-image object-fit="contain" :height="300" :show-toolbar="false" :preview-disabled="true"
 							:src="renderPortrait(showModalInfo)"
 							style="display: flex; justify-content: center; margin-top: 20px; margin-bottom: 10px" />
 					</n-badge>
@@ -73,9 +70,10 @@
 							</n-space>
 						</div>
 					</div>
-					<video v-if="showModalInfo.hasVideo" style="height: 250px; width: 500px;" :src="renderVideo()" controls></video>
+					<video v-if="showModalInfo.hasVideo" style="height: 250px; width: 500px;" :src="renderVideo()"
+						controls></video>
 				</div>
-				
+
 				<!-- 英雄技能 -->
 				<div v-show="showModalInfo.skill">
 					<n-divider />
@@ -181,10 +179,14 @@
 					<h3>专属装备</h3>
 					<div style="display: flex">
 						<div>
-							<n-image object-fit="contain" width="100" height="100" :src="renderZwImg()" preview-disabled />
-							<div style="text-align: center; font-weight: bold; padding-top: 3px;">{{ showModalInfo.weapon.name }}</div>
-							<div v-if="showModalInfo.weapon.strength" style="display: flex; align-items: center; justify-content: center; padding-top: 3px;">
-								<n-image object-fit="contain" width="15" height="15" src="/images/strength.png" preview-disabled />
+							<n-image object-fit="contain" width="100" height="100" :src="renderZwImg()"
+								preview-disabled />
+							<div style="text-align: center; font-weight: bold; padding-top: 3px;">{{
+								showModalInfo.weapon.name }}</div>
+							<div v-if="showModalInfo.weapon.strength"
+								style="display: flex; align-items: center; justify-content: center; padding-top: 3px;">
+								<n-image object-fit="contain" width="15" height="15" src="/images/strength.png"
+									preview-disabled />
 								<span style="padding-left: 3px;">{{ showModalInfo.weapon.strength }}</span>
 							</div>
 						</div>
@@ -260,49 +262,49 @@ const renderSkillClass = (index, type) => {
 	return myClass;
 };
 
+const renderVideo = () => {
+	const imgUrl = `/endless-winter/videos/heros/${showModalInfo.value.addr}/cg.mp4`;
+	return new URL(imgUrl, import.meta.url).href;
+}
+
 const renderAvatar = obj => {
-	const imgUrl = `/images/heros/${obj.addr}/avatar.png`;
+	const imgUrl = `/endless-winter/images/heros/${obj.addr}/avatar.png`;
 	return new URL(imgUrl, import.meta.url).href;
 };
 
 const renderPortrait = obj => {
-	const imgUrl = `/images/heros/${obj.addr}/portrait.png`;
+	const imgUrl = `/endless-winter/images/heros/${obj.addr}/portrait.png`;
 	return new URL(imgUrl, import.meta.url).href;
 };
 
-const renderVideo = () => {
-	const imgUrl = `/video/heros/${showModalInfo.value.addr}/cg.mp4`;
-	return new URL(imgUrl, import.meta.url).href;
-}
-
 const renderTalent = () => {
-	const imgUrl = `/images/heros/${showModalInfo.value.addr}/tf.png`;
+	const imgUrl = `/endless-winter/images/heros/${showModalInfo.value.addr}/tf.png`;
 	return new URL(imgUrl, import.meta.url).href;
 };
 
 const renderTxImg = () => {
-	const imgUrl = `/images/heros/${showModalInfo.value.addr}/tx.png`;
+	const imgUrl = `/endless-winter/images/heros/${showModalInfo.value.addr}/tx.png`;
 	return new URL(imgUrl, import.meta.url).href;
 };
 
 const renderYzImg = () => {
-	const imgUrl = `/images/heros/${showModalInfo.value.addr}/yz.png`;
+	const imgUrl = `/endless-winter/images/heros/${showModalInfo.value.addr}/yz.png`;
 	console.log("renderYzImg: " + imgUrl);
 	return new URL(imgUrl, import.meta.url).href;
 };
 
 const renderZwImg = () => {
-	const imgUrl = `/images/heros/${showModalInfo.value.addr}/zw.png`;
+	const imgUrl = `/endless-winter/images/heros/${showModalInfo.value.addr}/zw.png`;
 	return new URL(imgUrl, import.meta.url).href;
 };
 
 const renderZwTxImg = () => {
-	const imgUrl = `/images/heros/${showModalInfo.value.addr}/zw-tx.png`;
+	const imgUrl = `/endless-winter/images/heros/${showModalInfo.value.addr}/zw-tx.png`;
 	return new URL(imgUrl, import.meta.url).href;
 };
 
 const renderZwYzImg = () => {
-	const imgUrl = `/images/heros/${showModalInfo.value.addr}/zw-yz.png`;
+	const imgUrl = `/endless-winter/images/heros/${showModalInfo.value.addr}/zw-yz.png`;
 	return new URL(imgUrl, import.meta.url).href;
 };
 
