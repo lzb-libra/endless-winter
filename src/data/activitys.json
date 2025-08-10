@@ -1,40 +1,14 @@
 [
     {
-        "key": "jun_bei_jing_yan",
-        "name": "军备竞演"
-    },
-    {
-        "key": "shi_guan_ji_hua",
-        "name": "士官计划",
-        "source_points": [
-            {"point": "70", "desc": "领主装备宝石最高评分提升1点"},
-            {"point": "6000", "desc": "消耗1个英雄装备专精能原石"},
-            {"point": "12000", "desc": "消耗1个任意英雄专属装备对应的组件"},
-            {"point": "1", "desc": "训练1位1级士兵"},
-            {"point": "2", "desc": "训练1位2级士兵"},
-            {"point": "3", "desc": "训练1位3级士兵"},
-            {"point": "4", "desc": "训练1位4级士兵"},
-            {"point": "6", "desc": "训练1位5级士兵"},
-            {"point": "9", "desc": "训练1位6级士兵"},
-            {"point": "12", "desc": "训练1位7级士兵"},
-            {"point": "17", "desc": "训练1位8级士兵"},
-            {"point": "22", "desc": "训练1位9级士兵"},
-            {"point": "30", "desc": "训练1位10级士兵"},
-            {"point": "60", "desc": "训练1位11级士兵"}
-        ]
-    },
-    {
-        "key": "lian_meng_zong_dong_yuan",
-        "name": "联盟总动员"
-    },
-    {
-        "key": "lian_meng_zong_dong_yuan",
-        "name": "联盟总动员"
-    },
-    {
         "key": "shuang_long_ba_zhu",
-        "name": "霜龙霸主",
-        "rule": {},
-        "reward": ""
+        "name": "霜龙霸主"
+    },
+    {
+        "key": "lian_meng_zong_dong_yuan",
+        "name": "联盟总动员"
+    },
+    {
+        "key": "chu_xue_xiao_fen_dui",
+        "name": "除雪小分队"
     }
 ]

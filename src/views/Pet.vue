@@ -71,12 +71,12 @@ import { onMounted } from "vue";
 import allPets from "../data/pets.json";
 
 const renderPetImg = obj => {
-	const imgUrl = `/images/pets/${obj.key}.png`;
+	const imgUrl = `${import.meta.env.BASE_URL}images/pets/${obj.key}.png`;
 	return new URL(imgUrl, import.meta.url).href;
 };
 
 const renderPetSkillImg = obj => {
-	const imgUrl = `/images/pets/${obj.key}_skill.png`;
+	const imgUrl = `${import.meta.env.BASE_URL}images/pets/${obj.key}_skill.png`;
 	return new URL(imgUrl, import.meta.url).href;
 };
 

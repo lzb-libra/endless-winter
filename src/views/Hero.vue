@@ -185,7 +185,7 @@
 								showModalInfo.weapon.name }}</div>
 							<div v-if="showModalInfo.weapon.strength"
 								style="display: flex; align-items: center; justify-content: center; padding-top: 3px;">
-								<n-image object-fit="contain" width="15" height="15" src="/images/strength.png"
+								<n-image object-fit="contain" width="15" height="15" src="/endless-winter/images/strength.png"
 									preview-disabled />
 								<span style="padding-left: 3px;">{{ showModalInfo.weapon.strength }}</span>
 							</div>
@@ -202,8 +202,7 @@
 							<div>{{ showModalInfo.as === 1 ? "盾兵" : showModalInfo.as === 2 ? "矛兵" : "射手" }}生命值: +{{
 								showModalInfo.weapon.data[7] }}%</div>
 						</div>
-						<div
-							style="padding-left: 40px; display: flex; flex-direction: column; justify-content: space-between">
+						<div style="padding-left: 40px; display: flex; flex-direction: column; justify-content: space-between">
 							<div style="display: flex">
 								<div>
 									<n-image object-fit="contain" width="80" height="80" :src="renderZwTxImg()"
@@ -215,7 +214,7 @@
 									<div>{{ showModalInfo.weapon.tx.desc }}</div>
 								</div>
 							</div>
-							<div style="display: flex">
+							<div style="display: flex; margin-top: 20px;">
 								<div>
 									<n-image object-fit="contain" width="80" height="80" :src="renderZwYzImg()"
 										preview-disabled />
@@ -263,48 +262,48 @@ const renderSkillClass = (index, type) => {
 };
 
 const renderVideo = () => {
-	const imgUrl = `/endless-winter/videos/heros/${showModalInfo.value.addr}/cg.mp4`;
+	const imgUrl = `${import.meta.env.BASE_URL}videos/heros/${showModalInfo.value.addr}/cg.mp4`;
 	return new URL(imgUrl, import.meta.url).href;
 }
 
 const renderAvatar = obj => {
-	const imgUrl = `/endless-winter/images/heros/${obj.addr}/avatar.png`;
+	const imgUrl = `${import.meta.env.BASE_URL}images/heros/${obj.addr}/avatar.png`;
 	return new URL(imgUrl, import.meta.url).href;
 };
 
 const renderPortrait = obj => {
-	const imgUrl = `/endless-winter/images/heros/${obj.addr}/portrait.png`;
+	const imgUrl = `${import.meta.env.BASE_URL}images/heros/${obj.addr}/portrait.png`;
 	return new URL(imgUrl, import.meta.url).href;
 };
 
 const renderTalent = () => {
-	const imgUrl = `/endless-winter/images/heros/${showModalInfo.value.addr}/tf.png`;
+	const imgUrl = `${import.meta.env.BASE_URL}images/heros/${showModalInfo.value.addr}/tf.png`;
 	return new URL(imgUrl, import.meta.url).href;
 };
 
 const renderTxImg = () => {
-	const imgUrl = `/endless-winter/images/heros/${showModalInfo.value.addr}/tx.png`;
+	const imgUrl = `${import.meta.env.BASE_URL}images/heros/${showModalInfo.value.addr}/tx.png`;
 	return new URL(imgUrl, import.meta.url).href;
 };
 
 const renderYzImg = () => {
-	const imgUrl = `/endless-winter/images/heros/${showModalInfo.value.addr}/yz.png`;
+	const imgUrl = `${import.meta.env.BASE_URL}images/heros/${showModalInfo.value.addr}/yz.png`;
 	console.log("renderYzImg: " + imgUrl);
 	return new URL(imgUrl, import.meta.url).href;
 };
 
 const renderZwImg = () => {
-	const imgUrl = `/endless-winter/images/heros/${showModalInfo.value.addr}/zw.png`;
+	const imgUrl = `${import.meta.env.BASE_URL}images/heros/${showModalInfo.value.addr}/zw.png`;
 	return new URL(imgUrl, import.meta.url).href;
 };
 
 const renderZwTxImg = () => {
-	const imgUrl = `/endless-winter/images/heros/${showModalInfo.value.addr}/zw-tx.png`;
+	const imgUrl = `${import.meta.env.BASE_URL}images/heros/${showModalInfo.value.addr}/zw-tx.png`;
 	return new URL(imgUrl, import.meta.url).href;
 };
 
 const renderZwYzImg = () => {
-	const imgUrl = `/endless-winter/images/heros/${showModalInfo.value.addr}/zw-yz.png`;
+	const imgUrl = `${import.meta.env.BASE_URL}images/heros/${showModalInfo.value.addr}/zw-yz.png`;
 	return new URL(imgUrl, import.meta.url).href;
 };
 

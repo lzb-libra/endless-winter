@@ -75,7 +75,7 @@ const menuOptions = [
 
 onMounted(() => {
 	const pathname = window.location.pathname;
-	activeKey.value = pathname.replace("/assistant/", "");
+	activeKey.value = pathname.replace("/endless-winter/", "");
 });
 </script>
 
@@ -86,10 +86,13 @@ onMounted(() => {
 
 .main-menu {
 	padding: 20px;
+	position: fixed;
+	z-index: 999;
+	width: 1650px;
 }
 
 .main-content {
-	margin-top: 15px;
+	margin-top: 100px;
 	margin-bottom: 20px;
 }
 </style>
