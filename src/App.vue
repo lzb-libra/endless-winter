@@ -51,6 +51,19 @@ const menuOptions = [
 				RouterLink,
 				{
 					to: {
+						name: "Expert",
+					},
+				},
+				{ default: () => "专家" }
+			),
+		key: "expert",
+	},
+	{
+		label: () =>
+			h(
+				RouterLink,
+				{
+					to: {
 						name: "Activity",
 					},
 				},
