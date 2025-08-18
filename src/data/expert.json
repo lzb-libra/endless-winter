@@ -1,0 +1,99 @@
+[
+    {
+        "key": "xi_li_er",
+        "name": "西里尔",
+        "type": "巨熊猎人",
+        "yz": {
+            "desc": "部队攻击力",
+            "effect": "+15.00%"
+        },
+        "story": "",
+        "strength": 0,
+        "talent": {
+            "name": " 猎手之心",
+            "desc": "西里尔传授的心得，让猎手们能从狩猎中领悟更多的技巧，使参与猎熊行动获得的伤害积分提升30%(仅对自己有效)。",
+            "grade": [
+                {"level": 1, "effect": 2, "strength": 36000},
+                {"level": 2, "effect": 4, "strength": 72000},
+                {"level": 3, "effect": 6, "strength": 108000},
+                {"level": 4, "effect": 9, "strength": 144000},
+                {"level": 5, "effect": 12, "strength": 180000},
+                {"level": 6, "effect": 15, "strength": 216000},
+                {"level": 7, "effect": 18, "strength": 252000},
+                {"level": 8, "effect": 21, "strength": 288000},
+                {"level": 9, "effect": 24, "strength": 324000},
+                {"level": 10, "effect": 27, "strength": 360000},
+                {"level": 11, "effect": 30, "strength": 396000}
+            ]
+        },
+        "likability": [
+            {"level": "Lv1 萍水相逢", "effect": "部队攻击力 +0.60%"},
+            {"level": "Lv10 泛泛之交1", "effect": "部队攻击力 +1.20%"},
+            {"level": "Lv20 泛泛之交2", "effect": "部队攻击力 +1.80%"},
+            {"level": "Lv30 泛泛之交3", "effect": "部队攻击力 +2.40%"},
+            {"level": "Lv40 志趣相投1", "effect": "部队攻击力 +3.00%"},
+            {"level": "Lv50 志趣相投2", "effect": "部队攻击力 +3.60%"},
+            {"level": "Lv60 志趣相投3", "effect": "部队攻击力 +4.20%"},
+            {"level": "Lv70 推心置腹1", "effect": "部队攻击力 +4.80%"},
+            {"level": "Lv80 推心置腹2", "effect": "部队攻击力 +5.40%"},
+            {"level": "Lv90 推心置腹3", "effect": "部队攻击力 +6.00%"},
+            {"level": "Lv100 莫逆于心", "effect": "部队攻击力 +6.60%"}
+        ],
+        "skill": [
+            {
+                "name": "四方围猎", 
+                "desc": "西里尔的围猎战术，让领主们可以调动更多猎手投入到狩猎的盛宴中去，使发起猎熊行动的集结容量上限提升300000.",
+                "grade": [
+                    {"level": 1, "effect": 30000, "strength": 3000},
+                    {"level": 2, "effect": 60000, "strength": 6000},
+                    {"level": 3, "effect": 90000, "strength": 9000},
+                    {"level": 4, "effect": 120000, "strength": 12000},
+                    {"level": 5, "effect": 150000, "strength": 15000},
+                    {"level": 6, "effect": 180000, "strength": 18000},
+                    {"level": 7, "effect": 210000, "strength": 21000},
+                    {"level": 8, "effect": 240000, "strength": 24000},
+                    {"level": 9, "effect": 270000, "strength": 27000},
+                    {"level": 10, "effect": 300000, "strength": 30000}
+                ]
+            },
+            {
+                "name": "回收利用", 
+                "desc": "西里尔擅长回收消耗在猎场上的武器并加以利用。得力于她传授的经验，参与每期猎熊行动，可额外获得5个100点强化经验零件奖励。",
+                "grade": [
+                    {"level": 1, "effect": 1, "strength": 13000},
+                    {"level": 2, "effect": 2, "strength": 26000},
+                    {"level": 3, "effect": 3, "strength": 39000},
+                    {"level": 4, "effect": 4, "strength": 52000},
+                    {"level": 5, "effect": 5, "strength": 65000}
+                ]
+            },
+            {
+                "name": "武备专精", 
+                "desc": "西里尔的指导，加深了参与狩猎的英雄们对装备的理解，从而提升专精度。每次猎熊行动可额外获得5个专精能源石奖励。",
+                "grade": [
+                    {"level": 1, "effect": 1, "strength": 20000},
+                    {"level": 2, "effect": 2, "strength": 40000},
+                    {"level": 3, "effect": 3, "strength": 60000},
+                    {"level": 4, "effect": 4, "strength": 80000},
+                    {"level": 5, "effect": 5, "strength": 100000}
+                ]
+            },
+            {
+                "name": "巨熊克星", 
+                "desc": "西里尔传授的指挥技艺让领主能更有效率地调动猎手们加入狩猎，使参与猎熊行动时的出征部队容量上限提升30000。",
+                "grade": [
+                    {"level": 1, "effect": 3000, "strength": 7000},
+                    {"level": 2, "effect": 6000, "strength": 14000},
+                    {"level": 3, "effect": 9000, "strength": 21000},
+                    {"level": 4, "effect": 12000, "strength": 28000},
+                    {"level": 5, "effect": 15000, "strength": 35000},
+                    {"level": 6, "effect": 18000, "strength": 42000},
+                    {"level": 7, "effect": 21000, "strength": 49000},
+                    {"level": 8, "effect": 24000, "strength": 56000},
+                    {"level": 9, "effect": 27000, "strength": 63000},
+                    {"level": 10, "effect": 30000, "strength": 70000}
+                ]
+            }
+        ]
+    }
+]
