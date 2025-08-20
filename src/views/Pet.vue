@@ -68,7 +68,7 @@
 
 <script setup>
 import { onMounted } from "vue";
-import allPets from "../data/pets.json";
+import allPets from "@/data/pets.json";
 
 const renderPetImg = obj => {
 	const imgUrl = `${import.meta.env.BASE_URL}images/pets/${obj.key}.png`;

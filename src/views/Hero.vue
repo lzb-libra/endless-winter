@@ -185,8 +185,8 @@
 								showModalInfo.weapon.name }}</div>
 							<div v-if="showModalInfo.weapon.strength"
 								style="display: flex; align-items: center; justify-content: center; padding-top: 3px;">
-								<n-image object-fit="contain" width="15" height="15" src="/endless-winter/images/strength.png"
-									preview-disabled />
+								<n-image object-fit="contain" width="15" height="15"
+									src="/endless-winter/images/strength.png" preview-disabled />
 								<span style="padding-left: 3px;">{{ showModalInfo.weapon.strength }}</span>
 							</div>
 						</div>
@@ -202,7 +202,8 @@
 							<div>{{ showModalInfo.as === 1 ? "盾兵" : showModalInfo.as === 2 ? "矛兵" : "射手" }}生命值: +{{
 								showModalInfo.weapon.data[7] }}%</div>
 						</div>
-						<div style="padding-left: 40px; display: flex; flex-direction: column; justify-content: space-between">
+						<div
+							style="padding-left: 40px; display: flex; flex-direction: column; justify-content: space-between">
 							<div style="display: flex">
 								<div>
 									<n-image object-fit="contain" width="80" height="80" :src="renderZwTxImg()"
@@ -235,7 +236,7 @@
 
 <script setup>
 import { ref, h, onMounted } from "vue";
-import allHeroDatum from "../data/heros.json";
+import allHeroDatum from "@/data/heros.json";
 
 const showModal = ref(false);
 const showModalInfo = ref({});

@@ -6,7 +6,7 @@ import Expert from "../views/Expert.vue";
 import About from "../views/About.vue";
 
 const routes = [
-	{ path: "/", redirect: "/about" },
+	{ path: "/", redirect: "/expert" },
 	{ path: "/hero", name: "Hero", component: Hero },
 	{ path: "/pet", name: "Pet", component: Pet },
 	{ path: "/expert", name: "Expert", component: Expert },

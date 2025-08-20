@@ -7,6 +7,12 @@
 			<n-layout-content class="main-content">
 				<router-view />
 			</n-layout-content>
+			<n-layout-footer>
+				<div style="text-align: center; padding: 20px 0;">
+					<span style="padding-right: 3px;">{{ `Copyright &copy; ${new Date().getFullYear()} ` }}</span>
+					<a href="https://beian.miit.gov.cn/" target="_blank" rel="noopener noreferrer">蒙ICP备2025029497号</a>
+				</div>
+			</n-layout-footer>
 		</n-layout>
 	</n-config-provider>
 </template>
@@ -88,6 +94,7 @@ const menuOptions = [
 
 onMounted(() => {
 	const pathname = window.location.pathname;
+	console.log(pathname)
 	activeKey.value = pathname.replace("/endless-winter/", "");
 });
 </script>

@@ -1,0 +1,4 @@
+User-agent: *
+Disallow:
+
+Sitemap: http://lirox.com.cn/endless-winter/sitemap.xml
