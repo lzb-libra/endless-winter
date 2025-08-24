@@ -14,6 +14,7 @@
 				</div>
 			</n-layout-footer>
 		</n-layout>
+		<n-back-top :right="100" />
 	</n-config-provider>
 </template>
 
@@ -108,7 +109,7 @@ onMounted(() => {
 	padding: 20px;
 	position: fixed;
 	z-index: 999;
-	width: 1650px;
+	width: 70vw;
 }
 
 .main-content {

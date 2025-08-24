@@ -3,7 +3,7 @@
 		<n-flex>
 			<n-card v-for="(obj, index) in allPets" :key="index" :title="obj.name" :hoverable="true" :embedded="true"
 				size="small" header-style="text-align: center" footer-style="text-align: center"
-				style="width: 221px; cursor: pointer">
+				style="width: 208px; cursor: pointer">
 				<template #header-extra>
 					<span v-if="obj.level === '良好'" style="color: #67ee7a">{{ obj.level }}</span>
 					<span v-if="obj.level === '稀有'" style="color: #70b8f1">{{ obj.level }}</span>

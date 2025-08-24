@@ -29,6 +29,7 @@ body {
   place-items: center;
   min-width: 320px;
   min-height: 100vh;
+  overflow-y: scroll;
 }
 
 h1 {
@@ -60,7 +61,7 @@ button:focus-visible {
 }
 
 #app {
-  width: 1650px;
+  width: 70vw;
   margin: 0 auto;
 }
 

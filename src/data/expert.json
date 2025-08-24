@@ -1,389 +1,201 @@
 [
 	{
-		"key": "xiLiEr",
+		"key": "XiLiEr",
 		"name": "西里尔",
 		"type": "巨熊猎人",
-		"yz": {
-			"desc": "部队攻击力",
-			"effect": "+15.00%"
-		},
+		"yz": [
+			{
+				"desc": "部队攻击力",
+				"effect": "+15.00%"
+			}
+		],
 		"story": "",
 		"strength": 0,
 		"talent": {
 			"name": " 猎手之心",
-			"desc": "西里尔传授的心得，让猎手们能从狩猎中领悟更多的技巧，使参与猎熊行动获得的伤害积分提升30%(仅对自己有效)。",
-			"grade": [
-				{ "level": 1, "effect": 2, "strength": 36000 },
-				{ "level": 2, "effect": 4, "strength": 72000 },
-				{ "level": 3, "effect": 6, "strength": 108000 },
-				{ "level": 4, "effect": 9, "strength": 144000 },
-				{ "level": 5, "effect": 12, "strength": 180000 },
-				{ "level": 6, "effect": 15, "strength": 216000 },
-				{ "level": 7, "effect": 18, "strength": 252000 },
-				{ "level": 8, "effect": 21, "strength": 288000 },
-				{ "level": 9, "effect": 24, "strength": 324000 },
-				{ "level": 10, "effect": 27, "strength": 360000 },
-				{ "level": 11, "effect": 30, "strength": 396000 }
-			]
+			"desc": "西里尔传授的心得，让猎手们能从狩猎中领悟更多的技巧，使参与猎熊行动获得的伤害积分提升30%(仅对自己有效)。"
 		},
 		"likability": [
-			{ "level": "Lv1 萍水相逢", "effect": "部队攻击力 +0.60%" },
-			{ "level": "Lv10 泛泛之交1", "effect": "部队攻击力 +1.20%" },
-			{ "level": "Lv20 泛泛之交2", "effect": "部队攻击力 +1.80%" },
-			{ "level": "Lv30 泛泛之交3", "effect": "部队攻击力 +2.40%" },
-			{ "level": "Lv40 志趣相投1", "effect": "部队攻击力 +3.00%" },
-			{ "level": "Lv50 志趣相投2", "effect": "部队攻击力 +3.60%" },
-			{ "level": "Lv60 志趣相投3", "effect": "部队攻击力 +4.20%" },
-			{ "level": "Lv70 推心置腹1", "effect": "部队攻击力 +4.80%" },
-			{ "level": "Lv80 推心置腹2", "effect": "部队攻击力 +5.40%" },
-			{ "level": "Lv90 推心置腹3", "effect": "部队攻击力 +6.00%" },
-			{ "level": "Lv100 莫逆于心", "effect": "部队攻击力 +6.60%" }
+			{ "level": "1", "desc": "萍水相逢",   "effect": "部队攻击力 +0.60%" },
+			{ "level": "10", "desc": "泛泛之交1", "effect": "部队攻击力 +1.20%" },
+			{ "level": "20", "desc": "泛泛之交2", "effect": "部队攻击力 +1.80%" },
+			{ "level": "30", "desc": "泛泛之交3", "effect": "部队攻击力 +2.40%" },
+			{ "level": "40", "desc": "志趣相投1", "effect": "部队攻击力 +3.00%" },
+			{ "level": "50", "desc": "志趣相投2", "effect": "部队攻击力 +3.60%" },
+			{ "level": "60", "desc": "志趣相投3", "effect": "部队攻击力 +4.20%" },
+			{ "level": "70", "desc": "推心置腹1", "effect": "部队攻击力 +4.80%" },
+			{ "level": "80", "desc": "推心置腹2", "effect": "部队攻击力 +5.40%" },
+			{ "level": "90", "desc": "推心置腹3", "effect": "部队攻击力 +6.00%" },
+			{ "level": "100", "desc": "莫逆于心", "effect": "部队攻击力 +6.60%" }
 		],
 		"skill": [
 			{
 				"name": "四方围猎",
-				"desc": "西里尔的围猎战术，让领主们可以调动更多猎手投入到狩猎的盛宴中去，使发起猎熊行动的集结容量上限提升300000.",
-				"grade": [
-					{ "level": 1, "effect": 30000, "strength": 3000 },
-					{ "level": 2, "effect": 60000, "strength": 6000 },
-					{ "level": 3, "effect": 90000, "strength": 9000 },
-					{ "level": 4, "effect": 120000, "strength": 12000 },
-					{ "level": 5, "effect": 150000, "strength": 15000 },
-					{ "level": 6, "effect": 180000, "strength": 18000 },
-					{ "level": 7, "effect": 210000, "strength": 21000 },
-					{ "level": 8, "effect": 240000, "strength": 24000 },
-					{ "level": 9, "effect": 270000, "strength": 27000 },
-					{ "level": 10, "effect": 300000, "strength": 30000 }
-				]
+				"desc": "西里尔的围猎战术，让领主们可以调动更多猎手投入到狩猎的盛宴中去，使发起猎熊行动的集结容量上限提升300000."
 			},
 			{
 				"name": "回收利用",
-				"desc": "西里尔擅长回收消耗在猎场上的武器并加以利用。得力于她传授的经验，参与每期猎熊行动，可额外获得5个100点强化经验零件奖励。",
-				"grade": [
-					{ "level": 1, "effect": 1, "strength": 13000 },
-					{ "level": 2, "effect": 2, "strength": 26000 },
-					{ "level": 3, "effect": 3, "strength": 39000 },
-					{ "level": 4, "effect": 4, "strength": 52000 },
-					{ "level": 5, "effect": 5, "strength": 65000 }
-				]
+				"desc": "西里尔擅长回收消耗在猎场上的武器并加以利用。得力于她传授的经验，参与每期猎熊行动，可额外获得5个100点强化经验零件奖励。"
 			},
 			{
 				"name": "武备专精",
-				"desc": "西里尔的指导，加深了参与狩猎的英雄们对装备的理解，从而提升专精度。每次猎熊行动可额外获得5个专精能源石奖励。",
-				"grade": [
-					{ "level": 1, "effect": 1, "strength": 20000 },
-					{ "level": 2, "effect": 2, "strength": 40000 },
-					{ "level": 3, "effect": 3, "strength": 60000 },
-					{ "level": 4, "effect": 4, "strength": 80000 },
-					{ "level": 5, "effect": 5, "strength": 100000 }
-				]
+				"desc": "西里尔的指导，加深了参与狩猎的英雄们对装备的理解，从而提升专精度。每次猎熊行动可额外获得5个专精能源石奖励。"
 			},
 			{
 				"name": "巨熊克星",
-				"desc": "西里尔传授的指挥技艺让领主能更有效率地调动猎手们加入狩猎，使参与猎熊行动时的出征部队容量上限提升30000。",
-				"grade": [
-					{ "level": 1, "effect": 3000, "strength": 7000 },
-					{ "level": 2, "effect": 6000, "strength": 14000 },
-					{ "level": 3, "effect": 9000, "strength": 21000 },
-					{ "level": 4, "effect": 12000, "strength": 28000 },
-					{ "level": 5, "effect": 15000, "strength": 35000 },
-					{ "level": 6, "effect": 18000, "strength": 42000 },
-					{ "level": 7, "effect": 21000, "strength": 49000 },
-					{ "level": 8, "effect": 24000, "strength": 56000 },
-					{ "level": 9, "effect": 27000, "strength": 63000 },
-					{ "level": 10, "effect": 30000, "strength": 70000 }
-				]
+				"desc": "西里尔传授的指挥技艺让领主能更有效率地调动猎手们加入狩猎，使参与猎熊行动时的出征部队容量上限提升30000。"
 			}
 		]
 	},
 	{
-		"key": "ai_ge_ni_si",
+		"key": "AiGeNiSi",
 		"name": "艾格妮丝",
 		"type": "内政精英",
-		"yz": {
-			"desc": "部队防御力",
-			"effect": "+15.00%"
-		},
+		"yz": [
+			{
+				"desc": "部队防御力",
+				"effect": "+15.00%"
+			}
+		],
 		"story": "",
 		"strength": 0,
 		"talent": {
 			"name": " 钻探先锋",
-			"desc": "采集资源时，利用阿卡迪亚科技研发的钻探机器人会同时搜寻并挖掘埋藏在周围的有用之物。每采集120分钟，可获得5个探寻者宝箱，每天最多可获得30个，每日0点重置可获得数量。",
-			"grade": [
-				{ "level": 1, "effect": 1, "strength": 36000 },
-				{ "level": 2, "effect": 1, "strength": 72000 },
-				{ "level": 3, "effect": 1, "strength": 108000 },
-				{ "level": 4, "effect": 2, "strength": 144000 },
-				{ "level": 5, "effect": 2, "strength": 180000 },
-				{ "level": 6, "effect": 3, "strength": 216000 },
-				{ "level": 7, "effect": 3, "strength": 252000 },
-				{ "level": 8, "effect": 4, "strength": 288000 },
-				{ "level": 9, "effect": 4, "strength": 324000 },
-				{ "level": 10, "effect": 5, "strength": 360000 },
-				{ "level": 11, "effect": 5, "strength": 396000 }
-			]
+			"desc": "采集资源时，利用阿卡迪亚科技研发的钻探机器人会同时搜寻并挖掘埋藏在周围的有用之物。每采集120分钟，可获得5个探寻者宝箱，每天最多可获得30个，每日0点重置可获得数量。"
 		},
 		"likability": [
-			{ "level": "Lv1 萍水相逢", "effect": "部队防御力 +0.60%" },
-			{ "level": "Lv10 泛泛之交1", "effect": "部队防御力 +1.20%" },
-			{ "level": "Lv20 泛泛之交2", "effect": "部队防御力 +1.80%" },
-			{ "level": "Lv30 泛泛之交3", "effect": "部队防御力 +2.40%" },
-			{ "level": "Lv40 志趣相投1", "effect": "部队防御力 +3.00%" },
-			{ "level": "Lv50 志趣相投2", "effect": "部队防御力 +3.60%" },
-			{ "level": "Lv60 志趣相投3", "effect": "部队防御力 +4.20%" },
-			{ "level": "Lv70 推心置腹1", "effect": "部队防御力 +4.80%" },
-			{ "level": "Lv80 推心置腹2", "effect": "部队防御力 +5.40%" },
-			{ "level": "Lv90 推心置腹3", "effect": "部队防御力 +6.00%" },
-			{ "level": "Lv100 莫逆于心", "effect": "部队防御力 +6.60%" }
+			{ "level": "1", "desc": "萍水相逢",   "effect": "部队防御力 +0.60%" },
+			{ "level": "10", "desc": "泛泛之交1", "effect": "部队防御力 +1.20%" },
+			{ "level": "20", "desc": "泛泛之交2", "effect": "部队防御力 +1.80%" },
+			{ "level": "30", "desc": "泛泛之交3", "effect": "部队防御力 +2.40%" },
+			{ "level": "40", "desc": "志趣相投1", "effect": "部队防御力 +3.00%" },
+			{ "level": "50", "desc": "志趣相投2", "effect": "部队防御力 +3.60%" },
+			{ "level": "60", "desc": "志趣相投3", "effect": "部队防御力 +4.20%" },
+			{ "level": "70", "desc": "推心置腹1", "effect": "部队防御力 +4.80%" },
+			{ "level": "80", "desc": "推心置腹2", "effect": "部队防御力 +5.40%" },
+			{ "level": "90", "desc": "推心置腹3", "effect": "部队防御力 +6.00%" },
+			{ "level": "100", "desc": "莫逆于心", "effect": "部队防御力 +6.60%" }
 		],
 		"skill": [
 			{
-				"name": "四方围猎",
-				"desc": "西里尔的围猎战术，让领主们可以调动更多猎手投入到狩猎的盛宴中去，使发起猎熊行动的集结容量上限提升300000.",
-				"grade": [
-					{ "level": 1, "effect": 30000, "strength": 3000 },
-					{ "level": 2, "effect": 60000, "strength": 6000 },
-					{ "level": 3, "effect": 90000, "strength": 9000 },
-					{ "level": 4, "effect": 120000, "strength": 12000 },
-					{ "level": 5, "effect": 150000, "strength": 15000 },
-					{ "level": 6, "effect": 180000, "strength": 18000 },
-					{ "level": 7, "effect": 210000, "strength": 21000 },
-					{ "level": 8, "effect": 240000, "strength": 24000 },
-					{ "level": 9, "effect": 270000, "strength": 27000 },
-					{ "level": 10, "effect": 300000, "strength": 30000 }
-				]
+				"name": "高效侦查",
+				"desc": "由艾格妮丝规划的侦查路线，大大提升了灯塔侦察机的工作效率，使之每日能额外发现8个情报工作。"
 			},
 			{
-				"name": "回收利用",
-				"desc": "西里尔擅长回收消耗在猎场上的武器并加以利用。得力于她传授的经验，参与每期猎熊行动，可额外获得5个100点强化经验零件奖励。",
-				"grade": [
-					{ "level": 1, "effect": 1, "strength": 13000 },
-					{ "level": 2, "effect": 2, "strength": 26000 },
-					{ "level": 3, "effect": 3, "strength": 39000 },
-					{ "level": 4, "effect": 4, "strength": 52000 },
-					{ "level": 5, "effect": 5, "strength": 65000 }
-				]
+				"name": "产能升级",
+				"desc": "艾格妮丝的改良方案，提升了罐头的生产效率，使仓库每次产出的领主体力提升40。"
 			},
 			{
-				"name": "武备专精",
-				"desc": "西里尔的指导，加深了参与狩猎的英雄们对装备的理解，从而提升专精度。每次猎熊行动可额外获得5个专精能源石奖励。",
-				"grade": [
-					{ "level": 1, "effect": 1, "strength": 20000 },
-					{ "level": 2, "effect": 2, "strength": 40000 },
-					{ "level": 3, "effect": 3, "strength": 60000 },
-					{ "level": 4, "effect": 4, "strength": 80000 },
-					{ "level": 5, "effect": 5, "strength": 100000 }
-				]
+				"name": "工程管理",
+				"desc": "艾格妮丝提供的管理方案，提升了建筑工人的工作效率，从而使每次建造时间缩短8小时。"
 			},
 			{
-				"name": "巨熊克星",
-				"desc": "西里尔传授的指挥技艺让领主能更有效率地调动猎手们加入狩猎，使参与猎熊行动时的出征部队容量上限提升30000。",
-				"grade": [
-					{ "level": 1, "effect": 3000, "strength": 7000 },
-					{ "level": 2, "effect": 6000, "strength": 14000 },
-					{ "level": 3, "effect": 9000, "strength": 21000 },
-					{ "level": 4, "effect": 12000, "strength": 28000 },
-					{ "level": 5, "effect": 15000, "strength": 35000 },
-					{ "level": 6, "effect": 18000, "strength": 42000 },
-					{ "level": 7, "effect": 21000, "strength": 49000 },
-					{ "level": 8, "effect": 24000, "strength": 56000 },
-					{ "level": 9, "effect": 27000, "strength": 63000 },
-					{ "level": 10, "effect": 30000, "strength": 70000 }
-				]
+				"name": "隐秘知识",
+				"desc": "艾格妮丝传授了被世人遗忘的神秘知识，得力于此，完成最后一个每日任务后开启宝箱可额外获得120枚神秘徽章，此外，神秘商店的免费刷新次数也将增加4次。"
 			}
 		]
 	},
 	{
-		"key": "luo_mu_lu_si",
+		"key": "LuoMuLuSi",
 		"name": "罗幕路斯",
 		"type": "军事顾问",
-		"yz": {
-			"desc": "部队防御力",
-			"effect": "+15.00%"
-		},
+		"yz": [
+			{
+				"desc": "部队杀伤力",
+				"effect": "+20.00%"
+			},
+			{
+				"desc": "部队生命值",
+				"effect": "+20.00%"
+			}
+		],
 		"story": "",
 		"strength": 0,
 		"talent": {
-			"name": " 钻探先锋",
-			"desc": "采集资源时，利用阿卡迪亚科技研发的钻探机器人会同时搜寻并挖掘埋藏在周围的有用之物。每采集120分钟，可获得5个探寻者宝箱，每天最多可获得30个，每日0点重置可获得数量。",
-			"grade": [
-				{ "level": 1, "effect": 1, "strength": 36000 },
-				{ "level": 2, "effect": 1, "strength": 72000 },
-				{ "level": 3, "effect": 1, "strength": 108000 },
-				{ "level": 4, "effect": 2, "strength": 144000 },
-				{ "level": 5, "effect": 2, "strength": 180000 },
-				{ "level": 6, "effect": 3, "strength": 216000 },
-				{ "level": 7, "effect": 3, "strength": 252000 },
-				{ "level": 8, "effect": 4, "strength": 288000 },
-				{ "level": 9, "effect": 4, "strength": 324000 },
-				{ "level": 10, "effect": 5, "strength": 360000 },
-				{ "level": 11, "effect": 5, "strength": 396000 }
-			]
+			"name": "钢铁雄狮",
+			"desc": "罗幕路斯传授的指挥技艺，让英雄们能够率领更大规模的部队出战，使出征部队上限提升10000。"
 		},
 		"likability": [
-			{ "level": "Lv1 萍水相逢", "effect": "部队防御力 +0.60%" },
-			{ "level": "Lv10 泛泛之交1", "effect": "部队防御力 +1.20%" },
-			{ "level": "Lv20 泛泛之交2", "effect": "部队防御力 +1.80%" },
-			{ "level": "Lv30 泛泛之交3", "effect": "部队防御力 +2.40%" },
-			{ "level": "Lv40 志趣相投1", "effect": "部队防御力 +3.00%" },
-			{ "level": "Lv50 志趣相投2", "effect": "部队防御力 +3.60%" },
-			{ "level": "Lv60 志趣相投3", "effect": "部队防御力 +4.20%" },
-			{ "level": "Lv70 推心置腹1", "effect": "部队防御力 +4.80%" },
-			{ "level": "Lv80 推心置腹2", "effect": "部队防御力 +5.40%" },
-			{ "level": "Lv90 推心置腹3", "effect": "部队防御力 +6.00%" },
-			{ "level": "Lv100 莫逆于心", "effect": "部队防御力 +6.60%" }
+			{ "level": "1", "desc": "萍水相逢",   "effect": "部队杀伤力 +0.80%, <br>部队生命值 +0.80%" },
+			{ "level": "10", "desc": "泛泛之交1", "effect": "部队杀伤力 +1.60%, <br>部队生命值 +1.60%" },
+			{ "level": "20", "desc": "泛泛之交2", "effect": "部队杀伤力 +2.40%, <br>部队生命值 +2.40%" },
+			{ "level": "30", "desc": "泛泛之交3", "effect": "部队杀伤力 +3.20%, <br>部队生命值 +3.20%" },
+			{ "level": "40", "desc": "志趣相投1", "effect": "部队杀伤力 +4.00%, <br>部队生命值 +4.00%" },
+			{ "level": "50", "desc": "志趣相投2", "effect": "部队杀伤力 +4.80%, <br>部队生命值 +4.80%" },
+			{ "level": "60", "desc": "志趣相投3", "effect": "部队杀伤力 +5.60%, <br>部队生命值 +5.60%" },
+			{ "level": "70", "desc": "推心置腹1", "effect": "部队杀伤力 +6.40%, <br>部队生命值 +6.40%" },
+			{ "level": "80", "desc": "推心置腹2", "effect": "部队杀伤力 +7.20%, <br>部队生命值 +7.20%" },
+			{ "level": "90", "desc": "推心置腹3", "effect": "部队杀伤力 +8.00%, <br>部队生命值 +8.00%" },
+			{ "level": "100", "desc": "莫逆于心", "effect": "部队杀伤力 +8.80%, <br>部队生命值 +8.80%" }
 		],
 		"skill": [
 			{
-				"name": "四方围猎",
-				"desc": "西里尔的围猎战术，让领主们可以调动更多猎手投入到狩猎的盛宴中去，使发起猎熊行动的集结容量上限提升300000.",
-				"grade": [
-					{ "level": 1, "effect": 30000, "strength": 3000 },
-					{ "level": 2, "effect": 60000, "strength": 6000 },
-					{ "level": 3, "effect": 90000, "strength": 9000 },
-					{ "level": 4, "effect": 120000, "strength": 12000 },
-					{ "level": 5, "effect": 150000, "strength": 15000 },
-					{ "level": 6, "effect": 180000, "strength": 18000 },
-					{ "level": 7, "effect": 210000, "strength": 21000 },
-					{ "level": 8, "effect": 240000, "strength": 24000 },
-					{ "level": 9, "effect": 270000, "strength": 27000 },
-					{ "level": 10, "effect": 300000, "strength": 30000 }
-				]
+				"name": "战火的呼唤",
+				"desc": "罗幕路斯传授的动员技巧，能让更多勇士加入队伍。得力于此，每天可从任意一个兵营中免费招募600名该兵营已解锁最高等级的士兵，此外，可额外从募兵所获得10枚忠诚军牌。"
 			},
 			{
-				"name": "回收利用",
-				"desc": "西里尔擅长回收消耗在猎场上的武器并加以利用。得力于她传授的经验，参与每期猎熊行动，可额外获得5个100点强化经验零件奖励。",
-				"grade": [
-					{ "level": 1, "effect": 1, "strength": 13000 },
-					{ "level": 2, "effect": 2, "strength": 26000 },
-					{ "level": 3, "effect": 3, "strength": 39000 },
-					{ "level": 4, "effect": 4, "strength": 52000 },
-					{ "level": 5, "effect": 5, "strength": 65000 }
-				]
+				"name": "最后的阵线",
+				"desc": "罗幕路斯传授了昔日为索拉里斯王朝坚守最后防线的阵型与战术，使部队的攻击力和防御力提升10%。"
 			},
 			{
-				"name": "武备专精",
-				"desc": "西里尔的指导，加深了参与狩猎的英雄们对装备的理解，从而提升专精度。每次猎熊行动可额外获得5个专精能源石奖励。",
-				"grade": [
-					{ "level": 1, "effect": 1, "strength": 20000 },
-					{ "level": 2, "effect": 2, "strength": 40000 },
-					{ "level": 3, "effect": 3, "strength": 60000 },
-					{ "level": 4, "effect": 4, "strength": 80000 },
-					{ "level": 5, "effect": 5, "strength": 100000 }
-				]
+				"name": "埃厄忒斯之威",
+				"desc": "罗幕路斯传授了训练精锐之师“埃厄忒斯”猎兵团的方法和理念，使部队的杀伤力和生命值提升10%。"
 			},
 			{
-				"name": "巨熊克星",
-				"desc": "西里尔传授的指挥技艺让领主能更有效率地调动猎手们加入狩猎，使参与猎熊行动时的出征部队容量上限提升30000。",
-				"grade": [
-					{ "level": 1, "effect": 3000, "strength": 7000 },
-					{ "level": 2, "effect": 6000, "strength": 14000 },
-					{ "level": 3, "effect": 9000, "strength": 21000 },
-					{ "level": 4, "effect": 12000, "strength": 28000 },
-					{ "level": 5, "effect": 15000, "strength": 35000 },
-					{ "level": 6, "effect": 18000, "strength": 42000 },
-					{ "level": 7, "effect": 21000, "strength": 49000 },
-					{ "level": 8, "effect": 24000, "strength": 56000 },
-					{ "level": 9, "effect": 27000, "strength": 63000 },
-					{ "level": 10, "effect": 30000, "strength": 70000 }
-				]
+				"name": "万众齐心",
+				"desc": "罗幕路斯传授了带领大兵团作战的终极指挥艺术，使集结容量提升100000。"
 			}
 		]
 	},
 	{
-		"key": "huo_er_ge",
+		"key": "HuoErGe",
 		"name": "霍尔格",
 		"type": "竞技场传奇",
-		"yz": {
-			"desc": "部队防御力",
-			"effect": "+15.00%"
-		},
+		"yz": [
+			{
+				"desc": "部队攻击力",
+				"effect": "+15.00%"
+			},
+			{
+				"desc": "部队防御力",
+				"effect": "+15.00%"
+			}
+		],
 		"story": "",
 		"strength": 0,
 		"talent": {
-			"name": " 钻探先锋",
-			"desc": "采集资源时，利用阿卡迪亚科技研发的钻探机器人会同时搜寻并挖掘埋藏在周围的有用之物。每采集120分钟，可获得5个探寻者宝箱，每天最多可获得30个，每日0点重置可获得数量。",
-			"grade": [
-				{ "level": 1, "effect": 1, "strength": 36000 },
-				{ "level": 2, "effect": 1, "strength": 72000 },
-				{ "level": 3, "effect": 1, "strength": 108000 },
-				{ "level": 4, "effect": 2, "strength": 144000 },
-				{ "level": 5, "effect": 2, "strength": 180000 },
-				{ "level": 6, "effect": 3, "strength": 216000 },
-				{ "level": 7, "effect": 3, "strength": 252000 },
-				{ "level": 8, "effect": 4, "strength": 288000 },
-				{ "level": 9, "effect": 4, "strength": 324000 },
-				{ "level": 10, "effect": 5, "strength": 360000 },
-				{ "level": 11, "effect": 5, "strength": 396000 }
-			]
+			"name": "战刃之舞",
+			"desc": "霍尔格知道如何用华丽的格斗技巧调动观众的热情。凭借他传授的技艺，每场竞技场战斗后，有100%的概率额外获得观众额外献上的礼物——3个角斗之星宝箱。"
 		},
 		"likability": [
-			{ "level": "Lv1 萍水相逢", "effect": "部队防御力 +0.60%" },
-			{ "level": "Lv10 泛泛之交1", "effect": "部队防御力 +1.20%" },
-			{ "level": "Lv20 泛泛之交2", "effect": "部队防御力 +1.80%" },
-			{ "level": "Lv30 泛泛之交3", "effect": "部队防御力 +2.40%" },
-			{ "level": "Lv40 志趣相投1", "effect": "部队防御力 +3.00%" },
-			{ "level": "Lv50 志趣相投2", "effect": "部队防御力 +3.60%" },
-			{ "level": "Lv60 志趣相投3", "effect": "部队防御力 +4.20%" },
-			{ "level": "Lv70 推心置腹1", "effect": "部队防御力 +4.80%" },
-			{ "level": "Lv80 推心置腹2", "effect": "部队防御力 +5.40%" },
-			{ "level": "Lv90 推心置腹3", "effect": "部队防御力 +6.00%" },
-			{ "level": "Lv100 莫逆于心", "effect": "部队防御力 +6.60%" }
+			{ "level": "1", "desc": "萍水相逢",   "effect": "部队攻击力 +0.60%, <br>部队防御力 +0.60%" },
+			{ "level": "10", "desc": "泛泛之交1", "effect": "部队攻击力 +1.20%, <br>部队防御力 +1.20%" },
+			{ "level": "20", "desc": "泛泛之交2", "effect": "部队攻击力 +1.80%, <br>部队防御力 +1.80%" },
+			{ "level": "30", "desc": "泛泛之交3", "effect": "部队攻击力 +2.40%, <br>部队防御力 +2.40%" },
+			{ "level": "40", "desc": "志趣相投1", "effect": "部队攻击力 +3.00%, <br>部队防御力 +3.00%" },
+			{ "level": "50", "desc": "志趣相投2", "effect": "部队攻击力 +3.60%, <br>部队防御力 +3.60%" },
+			{ "level": "60", "desc": "志趣相投3", "effect": "部队攻击力 +4.20%, <br>部队防御力 +4.20%" },
+			{ "level": "70", "desc": "推心置腹1", "effect": "部队攻击力 +4.80%, <br>部队防御力 +4.80%" },
+			{ "level": "80", "desc": "推心置腹2", "effect": "部队攻击力 +5.40%, <br>部队防御力 +5.40%" },
+			{ "level": "90", "desc": "推心置腹3", "effect": "部队攻击力 +6.00%, <br>部队防御力 +6.00%" },
+			{ "level": "100", "desc": "莫逆于心", "effect": "部队攻击力 +6.60%, <br>部队防御力 +6.60%" }
 		],
 		"skill": [
 			{
-				"name": "四方围猎",
-				"desc": "西里尔的围猎战术，让领主们可以调动更多猎手投入到狩猎的盛宴中去，使发起猎熊行动的集结容量上限提升300000.",
-				"grade": [
-					{ "level": 1, "effect": 30000, "strength": 3000 },
-					{ "level": 2, "effect": 60000, "strength": 6000 },
-					{ "level": 3, "effect": 90000, "strength": 9000 },
-					{ "level": 4, "effect": 120000, "strength": 12000 },
-					{ "level": 5, "effect": 150000, "strength": 15000 },
-					{ "level": 6, "effect": 180000, "strength": 18000 },
-					{ "level": 7, "effect": 210000, "strength": 21000 },
-					{ "level": 8, "effect": 240000, "strength": 24000 },
-					{ "level": 9, "effect": 270000, "strength": 27000 },
-					{ "level": 10, "effect": 300000, "strength": 30000 }
-				]
+				"name": "角斗精英",
+				"desc": "霍尔格严苛的训练，让护卫们也成为竞技场上的精英，使他们在竞技场战斗时攻击力和生命值提升20%。"
 			},
 			{
-				"name": "回收利用",
-				"desc": "西里尔擅长回收消耗在猎场上的武器并加以利用。得力于她传授的经验，参与每期猎熊行动，可额外获得5个100点强化经验零件奖励。",
-				"grade": [
-					{ "level": 1, "effect": 1, "strength": 13000 },
-					{ "level": 2, "effect": 2, "strength": 26000 },
-					{ "level": 3, "effect": 3, "strength": 39000 },
-					{ "level": 4, "effect": 4, "strength": 52000 },
-					{ "level": 5, "effect": 5, "strength": 65000 }
-				]
+				"name": "闪耀擂台",
+				"desc": "霍尔格传授的战术，极大地提升了竞技比赛的观赏性。作为票房分账，每日结算和每周结算的竞技币奖励提升，都将额外获得50%的竞技币。"
 			},
 			{
-				"name": "武备专精",
-				"desc": "西里尔的指导，加深了参与狩猎的英雄们对装备的理解，从而提升专精度。每次猎熊行动可额外获得5个专精能源石奖励。",
-				"grade": [
-					{ "level": 1, "effect": 1, "strength": 20000 },
-					{ "level": 2, "effect": 2, "strength": 40000 },
-					{ "level": 3, "effect": 3, "strength": 60000 },
-					{ "level": 4, "effect": 4, "strength": 80000 },
-					{ "level": 5, "effect": 5, "strength": 100000 }
-				]
+				"name": "竞技场之星",
+				"desc": "霍尔格提供的助益，让领主和英雄们成为竞技场的闪耀之星，并获得以下特权: 在竞技商店中有3个额外物品可供选购，这些商品的价格降低50%。"
 			},
 			{
-				"name": "巨熊克星",
-				"desc": "西里尔传授的指挥技艺让领主能更有效率地调动猎手们加入狩猎，使参与猎熊行动时的出征部队容量上限提升30000。",
-				"grade": [
-					{ "level": 1, "effect": 3000, "strength": 7000 },
-					{ "level": 2, "effect": 6000, "strength": 14000 },
-					{ "level": 3, "effect": 9000, "strength": 21000 },
-					{ "level": 4, "effect": 12000, "strength": 28000 },
-					{ "level": 5, "effect": 15000, "strength": 35000 },
-					{ "level": 6, "effect": 18000, "strength": 42000 },
-					{ "level": 7, "effect": 21000, "strength": 49000 },
-					{ "level": 8, "effect": 24000, "strength": 56000 },
-					{ "level": 9, "effect": 27000, "strength": 63000 },
-					{ "level": 10, "effect": 30000, "strength": 70000 }
-				]
+				"name": "勇冠全场",
+				"desc": "霍尔格的特训，让英雄们成为新一代的竞技场传奇，使他们攻击力和生命值提升20%。"
 			}
 		]
 	}

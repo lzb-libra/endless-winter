@@ -3,7 +3,7 @@
 		<n-layout-sider content-style="padding: 8px;">
 			<n-menu :options="menuOptions" @update:value="handleUpdateValue" default-value="shuang_long_ba_zhu" />
 		</n-layout-sider>
-		<n-layout-content content-style="padding-left: 24px;">
+		<n-layout-content content-style="padding-left: 24px; padding-right: 24px;">
 			<h1>规则说明</h1>
 			<div>
 				<h2>背景故事</h2>

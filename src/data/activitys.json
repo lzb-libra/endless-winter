@@ -10,5 +10,9 @@
     {
         "key": "chu_xue_xiao_fen_dui",
         "name": "除雪小分队"
+    },
+    {
+        "key": "xue_yu_bing_qi_lian_sai",
+        "name": "雪域兵器联赛"
     }
 ]

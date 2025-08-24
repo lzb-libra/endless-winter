@@ -1,9 +1,9 @@
 <template>
 	<div style="padding: 0 15px">
-		<n-flex>
+		<n-flex :size="[12, 12]">
 			<n-card v-for="(obj, index) in allHeroDatum" :key="index" :title="renderCardTitle(obj)" :hoverable="true"
 				:embedded="true" size="small" header-style="text-align: center" footer-style="text-align: center"
-				style="width: 169px; cursor: pointer" @click="clictItem(obj)">
+				style="width: 164px; cursor: pointer" @click="clictItem(obj)">
 				<template #cover>
 					<n-image object-fit="contain" :width="120" :height="120" :src="renderAvatar(obj)"
 						style="display: flex; justify-content: center; margin-top: 20px; margin-bottom: 10px"
@@ -20,8 +20,7 @@
 		</n-flex>
 	</div>
 
-	<n-modal v-model:show="showModal" transform-origin="center" @after-leave="onAfterLeave"
-		style="width: 1650px; height: 100vh;">
+	<n-modal v-model:show="showModal" transform-origin="center" @after-leave="onAfterLeave" style="width: 70vw; height: 100vh;" preset="card" draggable>
 		<div style="display: flex;">
 			<n-card style="width: 600px; padding-top: 30px;">
 				<div style="display: flex; flex-direction: column; align-items: center">
