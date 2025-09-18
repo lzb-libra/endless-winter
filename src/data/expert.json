@@ -93,7 +93,20 @@
 				"name": "隐秘知识",
 				"desc": "艾格妮丝传授了被世人遗忘的神秘知识，得力于此，完成最后一个每日任务后开启宝箱可额外获得120枚神秘徽章，此外，神秘商店的免费刷新次数也将增加4次。"
 			}
-		]
+		],
+		"treasureChest": {
+			"name": "探寻者宝箱",
+			"reward": [
+				{"article": "火晶 X10", "probability": "1.000%"},
+				{"article": "火晶 X1", "probability": "20.000%"},
+				{"article": "1000钻石 X1", "probability": "2.000%"},
+				{"article": "10钻石 X1", "probability": "20.000%"},
+				{"article": "100点强化经验零件 X1", "probability": "3.000%"},
+				{"article": "10点强化经验零件 X1", "probability": "20.000%"},
+				{"article": "1小时通用加速 X1", "probability": "4.000%"},
+				{"article": "5分钟通用加速 X1", "probability": "30.000%"}
+			]
+		}
 	},
 	{
 		"key": "LuoMuLuSi",
@@ -197,6 +210,17 @@
 				"name": "勇冠全场",
 				"desc": "霍尔格的特训，让英雄们成为新一代的竞技场传奇，使他们攻击力和生命值提升20%。"
 			}
-		]
+		],
+		"treasureChest": {
+			"name": "角斗之星宝箱",
+			"reward": [
+				{"article": "传说通用英雄碎片 X1", "probability": "4.000%"},
+				{"article": "专精能源石 X1", "probability": "6.000%"},
+				{"article": "100点强化经验零件 X1", "probability": "8.000%"},
+				{"article": "10点强化经验零件 X2", "probability": "20.000%"},
+				{"article": "1小时通用加速 X1", "probability": "10.000%"},
+				{"article": "5分钟通用加速 X1", "probability": "52.000%"}
+			]
+		}
 	}
 ]

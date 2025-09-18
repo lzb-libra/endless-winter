@@ -17,16 +17,16 @@ def analyzingWebSite(name, url, save_dir):
         soup = BeautifulSoup(response.text, "html.parser")
 
         # # 解析故事
-        analysisStory(soup)
+        # analysisStory(soup)
 
         # # 解析来源
-        analysisSource(soup)
+        # analysisSource(soup)
 
         # # 解析技能
         analysisSkill(soup, save_dir)
 
         # 解析专武
-        analysisSpecial(soup, save_dir)
+        # analysisSpecial(soup, save_dir)
         
     else:
         print("请求失败：", response.status_code)
@@ -191,49 +191,49 @@ if __name__ == "__main__":
         save_dir = "/Users/lizhibao/workspace/projects/GitHub/endless-winter/public/images/heros/"
 
     heros = [
-        {"name": "史密斯", "addr": "rare/ShiMiSi"},
-        {"name": "尤金", "addr": "rare/YouJin"},
-        {"name": "查理", "addr": "rare/ChaLi"},
-        {"name": "克劳瑞斯", "addr": "rare/KeLaoRuiSi"},
+        # {"name": "史密斯", "addr": "rare/ShiMiSi"},
+        # {"name": "尤金", "addr": "rare/YouJin"},
+        # {"name": "查理", "addr": "rare/ChaLi"},
+        # {"name": "克劳瑞斯", "addr": "rare/KeLaoRuiSi"},
 
-        {"name": "谢尔盖", "addr": "epic/XieErGai"},
-        {"name": "帕特里克", "addr": "epic/PaTeLiKe",},
-        {"name": "凌霜", "addr": "epic/LingXue",},
-        {"name": "卢姆·波根", 'addr': "epic/LuMuBoGen"},
-        {"name": "杰西", 'addr': "epic/JieXi"},
-        {"name": "巴希提", 'addr': "epic/BaXiTi"},
-        {"name": "杰塞尔", 'addr': "epic/JieSaiEr"},
-        {"name": "吉娜", 'addr': "epic/JiNa"},
-        {"name": "书允", 'addr': "epic/ShuYun"},
+        # {"name": "谢尔盖", "addr": "epic/XieErGai"},
+        # {"name": "帕特里克", "addr": "epic/PaTeLiKe",},
+        # {"name": "凌霜", "addr": "epic/LingXue",},
+        # {"name": "卢姆·波根", 'addr': "epic/LuMuBoGen"},
+        # {"name": "杰西", 'addr': "epic/JieXi"},
+        # {"name": "巴希提", 'addr': "epic/BaXiTi"},
+        # {"name": "杰塞尔", 'addr': "epic/JieSaiEr"},
+        # {"name": "吉娜", 'addr': "epic/JiNa"},
+        # {"name": "书允", 'addr': "epic/ShuYun"},
 
-        {"name": "赫罗尼莫", "addr": "lore/S1/HeLuoNiMo"},
-        {"name": "娜塔莉亚", "addr": "lore/S1/NaTaLiYa"},
+        # {"name": "赫罗尼莫", "addr": "lore/S1/HeLuoNiMo"},
+        # {"name": "娜塔莉亚", "addr": "lore/S1/NaTaLiYa"},
         {"name": "茉莉", "addr": "lore/S1/MoLi"},
-        {"name": "津曼", "addr": "lore/S1/JingMan"},
+        # {"name": "津曼", "addr": "lore/S1/JingMan"},
 
-        {"name": "弗林特", "addr": "lore/S2/FuLinTe"},
-        {"name": "菲蘭德-2", "addr": "lore/S2/FeiLanDe"},
-        {"name": "阿隆索", "addr": "lore/S2/ALongSuo"},
+        # {"name": "弗林特", "addr": "lore/S2/FuLinTe"},
+        # {"name": "菲蘭德-2", "addr": "lore/S2/FeiLanDe"},
+        # {"name": "阿隆索", "addr": "lore/S2/ALongSuo"},
 
-        {"name": "罗根", "addr": "lore/S3/LuoGen"},
-        {"name": "米娅", "addr": "lore/S3/MiYa"},
-        {"name": "格雷格", "addr": "lore/S3/GeLeiGe"},
+        # {"name": "罗根", "addr": "lore/S3/LuoGen"},
+        # {"name": "米娅", "addr": "lore/S3/MiYa"},
+        # {"name": "格雷格", "addr": "lore/S3/GeLeiGe"},
 
-        {"name": "阿赫摩斯", "addr": "lore/S4/AHeMoSi"},
-        {"name": "玲奈", "addr": "lore/S4/LingNai"},
-        {"name": "琳恩", "addr": "lore/S4/LinEn"},
+        # {"name": "阿赫摩斯", "addr": "lore/S4/AHeMoSi"},
+        # {"name": "玲奈", "addr": "lore/S4/LingNai"},
+        # {"name": "琳恩", "addr": "lore/S4/LinEn"},
 
-        {"name": "赫克托", "addr": "lore/S5/HeKeTuo"},
-        {"name": "诺拉", "addr": "lore/S5/NuoLa"},
-        {"name": "格温", "addr": "lore/S5/GeWen"},
+        # {"name": "赫克托", "addr": "lore/S5/HeKeTuo"},
+        # {"name": "诺拉", "addr": "lore/S5/NuoLa"},
+        # {"name": "格温", "addr": "lore/S5/GeWen"},
 
-        {"name": "無名", "addr": "lore/S6/WuMing"},
-        {"name": "芮妮", "addr": "lore/S6/RuiNi"},
-        {"name": "韋恩-2", "addr": "lore/S6/WeiEn"},
+        # {"name": "無名", "addr": "lore/S6/WuMing"},
+        # {"name": "芮妮", "addr": "lore/S6/RuiNi"},
+        # {"name": "韋恩-2", "addr": "lore/S6/WeiEn"},
 
-        {"name": "艾迪絲", "addr": "lore/S7/AiDiSi"},
-        {"name": "哥頓", "addr": "lore/S7/GeDun"},
-        {"name": "布拉德利", "addr": "lore/S7/BuLaDeLi"},
+        # {"name": "艾迪絲", "addr": "lore/S7/AiDiSi"},
+        # {"name": "哥頓", "addr": "lore/S7/GeDun"},
+        # {"name": "布拉德利", "addr": "lore/S7/BuLaDeLi"},
     ]
     
     for item in heros:

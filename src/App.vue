@@ -1,29 +1,30 @@
 <template>
-	<n-config-provider :theme="darkTheme">
-		<n-layout class="app-container">
-			<n-layout-header class="main-menu">
+	<n-config-provider :theme="isDarkMode ? darkTheme : lightTheme">
+		<n-layout style="height: 100vh;">
+			<n-layout-header position="absolute" style="padding: 5px 5vw;" bordered>
 				<n-menu v-model:value="activeKey" mode="horizontal" :options="menuOptions" responsive />
 			</n-layout-header>
-			<n-layout-content class="main-content">
+			<n-layout-content position="absolute" style="padding: 52px 5vw 70px 5vw;" bordered>
 				<router-view />
 			</n-layout-content>
-			<n-layout-footer>
-				<div style="text-align: center; padding: 20px 0;">
-					<span style="padding-right: 3px;">{{ `Copyright &copy; ${new Date().getFullYear()} ` }}</span>
-					<a href="https://beian.miit.gov.cn/" target="_blank" rel="noopener noreferrer">蒙ICP备2025029497号</a>
-				</div>
+			<n-layout-footer position="absolute" style="text-align: center; padding: 15px 5vw;" bordered>
+				<span style="padding-right: 3px;">{{ `Copyright &copy; ${new Date().getFullYear()}` }}</span>
+				<a href="https://beian.miit.gov.cn/" target="_blank" rel="noopener noreferrer">蒙ICP备2025029497号</a>
 			</n-layout-footer>
 		</n-layout>
-		<n-back-top :right="100" />
 	</n-config-provider>
 </template>
 
 <script setup>
-import { h, onMounted, ref } from "vue";
-import { RouterLink } from "vue-router";
-import { NConfigProvider, NLayout, NLayoutHeader, NLayoutContent, darkTheme } from "naive-ui";
+import { h, onMounted, ref, onUnmounted, watch } from "vue";
+import { RouterLink, useRoute } from "vue-router";
+import { NConfigProvider, NLayout, NLayoutHeader, NLayoutContent, darkTheme, lightTheme } from "naive-ui";
 
+const route = useRoute();
 const activeKey = ref("hero");
+const isDarkMode = ref(false);
+
+const darkModeQuery = window.matchMedia('(prefers-color-scheme: dark)')
 
 const menuOptions = [
 	{
@@ -84,36 +85,45 @@ const menuOptions = [
 				RouterLink,
 				{
 					to: {
-						name: "About",
+						name: "Chat",
 					},
 				},
-				{ default: () => "关于" }
+				{ default: () => "图表" }
 			),
-		key: "about",
+		key: "chat",
+	},
+	{
+		label: () =>
+			h(
+				RouterLink,
+				{
+					to: {
+						name: "Logs",
+					},
+				},
+				{ default: () => "日志" }
+			),
+		key: "logs",
 	},
 ];
 
+const updateSystemScheme = e => {
+	isDarkMode.value = e.matches
+}
+
+watch(() => route.path, newPath => {
+	console.log(newPath);
+
+	let pathname = window.location.pathname;
+	pathname = pathname.replace("/endless-winter/", "");
+	if(pathname.includes('hero')) pathname = 'hero';
+	activeKey.value = pathname;
+});
+
 onMounted(() => {
-	const pathname = window.location.pathname;
-	console.log(pathname)
-	activeKey.value = pathname.replace("/endless-winter/", "");
+	darkModeQuery.addEventListener('change', updateSystemScheme);
+	isDarkMode.value = darkModeQuery.matches
 });
 </script>
 
-<style scoped>
-.app-container {
-	min-height: 100vh;
-}
-
-.main-menu {
-	padding: 20px;
-	position: fixed;
-	z-index: 999;
-	width: 70vw;
-}
-
-.main-content {
-	margin-top: 100px;
-	margin-bottom: 20px;
-}
-</style>
+<style scoped></style>
