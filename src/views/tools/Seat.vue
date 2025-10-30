@@ -102,6 +102,7 @@ const handleUploadChange = async (fielInfo) => {
 
     // OCR 识别灰度图
     const worker = await createWorker({
+      workerPath: '/tesseract/worker.min.js',
       langPath: window.location.origin + import.meta.env.BASE_URL + '/lang-data',
       gzip: false,
     });
@@ -119,7 +120,7 @@ const handleUploadChange = async (fielInfo) => {
       console.log(item)
 
       if (item.includes('[QGD]')) {
-        const cleaned = item.split(' ').filter(item => item.trim() !== '')
+        const cleaned = item.replace('(二', '').split(' ').filter(item => item.trim() !== '')
         playerData['name'] = cleaned[0].replace('[QGD]', '')
       }
 
