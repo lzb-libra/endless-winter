@@ -92,6 +92,19 @@ const menuOptions = [
 			),
 		key: "chat",
 	},
+	// {
+	// 	label: () =>
+	// 		h(
+	// 			RouterLink,
+	// 			{
+	// 				to: {
+	// 					name: "Seat",
+	// 				},
+	// 			},
+	// 			{ default: () => "工具" }
+	// 		),
+	// 	key: "seat",
+	// },
 	{
 		label: () =>
 			h(

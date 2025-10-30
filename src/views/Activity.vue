@@ -181,6 +181,7 @@
 							<li>战场中，执政官系列头衔增益、至高执政官系列头衔增益、执政官技能增益、宠物增益、城镇增益、VIP属性、个人科技属性、联盟科技属性和装扮加成属性均会正常生效。</li>
 						</ol>
 					</n-tab-pane>
+					<n-tab-pane name="奖励" tab="奖励"></n-tab-pane>
 				</n-tabs>
 			</div>
 			<div v-show="selectValue === 'xue_yu_bing_qi_lian_sai'">
@@ -673,6 +674,277 @@
 							</li>
 						</ol>
 					</n-tab-pane>
+					<n-tab-pane name="奖励" tab="奖励">
+						<n-tabs type="card" animated>
+							<n-tab-pane name="普通商店">
+								<n-flex :size="[12, 12]">
+									<img :src="renderStuffImg('001')" class="activity_stuff_img" />
+									<img :src="renderStuffImg('002')" class="activity_stuff_img" />
+									<img :src="renderStuffImg('003')" class="activity_stuff_img" />
+									<img :src="renderStuffImg('004')" class="activity_stuff_img" />
+									<img :src="renderStuffImg('005')" class="activity_stuff_img" />
+									<img :src="renderStuffImg('006')" class="activity_stuff_img" />
+									<img :src="renderStuffImg('007')" class="activity_stuff_img" />
+									<img :src="renderStuffImg('008')" class="activity_stuff_img" />
+									<img :src="renderStuffImg('009')" class="activity_stuff_img" />
+									
+								</n-flex>
+							</n-tab-pane>
+							<n-tab-pane name="冠军商店">
+								<n-flex :size="[12, 12]">
+									<img :src="renderStuffImg('101')" class="activity_stuff_img" />
+									<img :src="renderStuffImg('102')" class="activity_stuff_img" />
+									<img :src="renderStuffImg('103')" class="activity_stuff_img" />
+									<img :src="renderStuffImg('104')" class="activity_stuff_img" />
+									<img :src="renderStuffImg('105')" class="activity_stuff_img" />
+									<img :src="renderStuffImg('106')" class="activity_stuff_img" />
+									<img :src="renderStuffImg('107')" class="activity_stuff_img" />
+									<img :src="renderStuffImg('108')" class="activity_stuff_img" />
+									<img :src="renderStuffImg('109')" class="activity_stuff_img" />
+									<img :src="renderStuffImg('110')" class="activity_stuff_img" />
+									<img :src="renderStuffImg('111')" class="activity_stuff_img" />
+									<img :src="renderStuffImg('112')" class="activity_stuff_img" />
+									<img :src="renderStuffImg('113')" class="activity_stuff_img" />
+									<img :src="renderStuffImg('114')" class="activity_stuff_img" />
+									<img :src="renderStuffImg('115')" class="activity_stuff_img" />
+									<img :src="renderStuffImg('116')" class="activity_stuff_img" />
+									<img :src="renderStuffImg('117')" class="activity_stuff_img" />
+									<img :src="renderStuffImg('118')" class="activity_stuff_img" />
+								</n-flex>
+							</n-tab-pane>
+							<n-tab-pane name="冠军荣耀">
+								<div>
+									<h2 style="margin-bottom: 50px; padding: 8px; border-bottom: 1px solid gray; width: 150px; border-left: 15px solid yellowgreen; border-top-left-radius: 5px; border-bottom-left-radius: 5px;">冠军联盟荣耀</h2>
+									<n-flex :wrap="false" size="medium" style="display: flex; flex-wrap: wrap;">
+										<img :src="renderStuffImg('501')" class="activity_stuff_img_4" />
+										<img :src="renderStuffImg('502')" class="activity_stuff_img_4" />
+										<img :src="renderStuffImg('503')" class="activity_stuff_img_4" />
+										<img :src="renderStuffImg('504')" class="activity_stuff_img_4" />
+									</n-flex>
+								</div>
+								<div style="padding-top: 50px;">
+									<h2 style="margin-bottom: 50px; padding: 8px; border-bottom: 1px solid gray; width: 150px; border-left: 15px solid yellowgreen; border-top-left-radius: 5px; border-bottom-left-radius: 5px;">四强联盟荣耀</h2>
+									<n-flex :wrap="false" size="medium" style="display: flex; flex-wrap: wrap">
+										<img :src="renderStuffImg('505')" class="activity_stuff_img_4" />
+										<img :src="renderStuffImg('506')" class="activity_stuff_img_4" />
+									</n-flex>
+								</div>
+							</n-tab-pane>
+							<n-tab-pane name="军团排名奖励">
+								<div class="activity_ranking_rewards">
+									<div class="activity_stuff_img_ranking">🥇</div>
+									<n-flex :wrap="false" size="medium" class="scroll-container">
+										<img :src="renderStuffImg('201')" class="activity_stuff_img_2" />
+										<img :src="renderStuffImg('203')" class="activity_stuff_img_2" />
+										<img :src="renderStuffImg('204')" class="activity_stuff_img_2" />
+										<img :src="renderStuffImg('205')" class="activity_stuff_img_2" />
+										<img :src="renderStuffImg('206')" class="activity_stuff_img_2" />
+										<img :src="renderStuffImg('207')" class="activity_stuff_img_2" />
+										<img :src="renderStuffImg('208')" class="activity_stuff_img_2" />
+										<img :src="renderStuffImg('202')" class="activity_stuff_img_2" />
+									</n-flex>
+								</div>
+								<div class="activity_ranking_rewards">
+									<div class="activity_stuff_img_ranking">🥈</div>
+									<n-flex :wrap="false" size="medium" class="scroll-container">
+										<img :src="renderStuffImg('209')" class="activity_stuff_img_2" />
+										<img :src="renderStuffImg('210')" class="activity_stuff_img_2" />
+										<img :src="renderStuffImg('211')" class="activity_stuff_img_2" />
+										<img :src="renderStuffImg('212')" class="activity_stuff_img_2" />
+										<img :src="renderStuffImg('213')" class="activity_stuff_img_2" />
+										<img :src="renderStuffImg('214')" class="activity_stuff_img_2" />
+										<img :src="renderStuffImg('215')" class="activity_stuff_img_2" />
+									</n-flex>
+								</div>
+								<div class="activity_ranking_rewards">
+									<div class="activity_stuff_img_ranking">🥉</div>
+									<n-flex :wrap="false" size="medium" class="scroll-container">
+										<img :src="renderStuffImg('216')" class="activity_stuff_img_2" />
+										<img :src="renderStuffImg('217')" class="activity_stuff_img_2" />
+										<img :src="renderStuffImg('218')" class="activity_stuff_img_2" />
+										<img :src="renderStuffImg('219')" class="activity_stuff_img_2" />
+										<img :src="renderStuffImg('220')" class="activity_stuff_img_2" />
+										<img :src="renderStuffImg('221')" class="activity_stuff_img_2" />
+										<img :src="renderStuffImg('222')" class="activity_stuff_img_2" />
+									</n-flex>
+								</div>
+								<div class="activity_ranking_rewards">
+									<div class="activity_stuff_img_ranking" style="font-size: 1.5em;">4</div>
+									<n-flex :wrap="false" size="medium" class="scroll-container">
+										<img :src="renderStuffImg('223')" class="activity_stuff_img_2" />
+										<img :src="renderStuffImg('224')" class="activity_stuff_img_2" />
+										<img :src="renderStuffImg('225')" class="activity_stuff_img_2" />
+										<img :src="renderStuffImg('226')" class="activity_stuff_img_2" />
+										<img :src="renderStuffImg('227')" class="activity_stuff_img_2" />
+										<img :src="renderStuffImg('228')" class="activity_stuff_img_2" />
+										<img :src="renderStuffImg('229')" class="activity_stuff_img_2" />
+									</n-flex>
+								</div>
+								<div class="activity_ranking_rewards">
+									<div class="activity_stuff_img_ranking" style="font-size: 1.5em;">5-8</div>
+									<n-flex :wrap="false" size="medium" class="scroll-container">
+										<img :src="renderStuffImg('230')" class="activity_stuff_img_2" />
+										<img :src="renderStuffImg('231')" class="activity_stuff_img_2" />
+										<img :src="renderStuffImg('232')" class="activity_stuff_img_2" />
+										<img :src="renderStuffImg('233')" class="activity_stuff_img_2" />
+									</n-flex>
+								</div>
+								<div class="activity_ranking_rewards">
+									<div class="activity_stuff_img_ranking" style="font-size: 1.5em;">9-16</div>
+									<n-flex :wrap="false" size="medium" class="scroll-container">
+										<img :src="renderStuffImg('234')" class="activity_stuff_img_2" />
+										<img :src="renderStuffImg('235')" class="activity_stuff_img_2" />
+										<img :src="renderStuffImg('236')" class="activity_stuff_img_2" />
+										<img :src="renderStuffImg('237')" class="activity_stuff_img_2" />
+									</n-flex>
+								</div>
+								<div class="activity_ranking_rewards">
+									<div class="activity_stuff_img_ranking" style="font-size: 1.5em;">17-32</div>
+									<n-flex :wrap="false" size="medium" class="scroll-container">
+										<img :src="renderStuffImg('238')" class="activity_stuff_img_2" />
+										<img :src="renderStuffImg('239')" class="activity_stuff_img_2" />
+										<img :src="renderStuffImg('240')" class="activity_stuff_img_2" />
+										<img :src="renderStuffImg('241')" class="activity_stuff_img_2" />
+									</n-flex>
+								</div>
+								<div class="activity_ranking_rewards">
+									<div class="activity_stuff_img_ranking" style="font-size: 1.5em;">33+</div>
+									<n-flex :wrap="false" size="medium" class="scroll-container">
+										<img :src="renderStuffImg('242')" class="activity_stuff_img_2" />
+										<img :src="renderStuffImg('243')" class="activity_stuff_img_2" />
+										<img :src="renderStuffImg('244')" class="activity_stuff_img_2" />
+										<img :src="renderStuffImg('245')" class="activity_stuff_img_2" />
+									</n-flex>
+								</div>
+							</n-tab-pane>
+							<n-tab-pane name="联盟排名奖励">
+								<div class="activity_ranking_rewards">
+									<div class="activity_stuff_img_ranking">🥇</div>
+									<n-flex :wrap="false" size="medium" class="scroll-container">
+										<img :src="renderStuffImg('301')" class="activity_stuff_img_2" />
+										<img :src="renderStuffImg('302')" class="activity_stuff_img_2" />
+										<img :src="renderStuffImg('303')" class="activity_stuff_img_2" />
+										<img :src="renderStuffImg('304')" class="activity_stuff_img_2" />
+									</n-flex>
+								</div>
+								<div class="activity_ranking_rewards">
+									<div class="activity_stuff_img_ranking">🥈</div>
+									<n-flex :wrap="false" size="medium" class="scroll-container">
+										<img :src="renderStuffImg('305')" class="activity_stuff_img_2" />
+										<img :src="renderStuffImg('306')" class="activity_stuff_img_2" />
+										<img :src="renderStuffImg('307')" class="activity_stuff_img_2" />
+										<img :src="renderStuffImg('308')" class="activity_stuff_img_2" />
+									</n-flex>
+								</div>
+								<div class="activity_ranking_rewards">
+									<div class="activity_stuff_img_ranking">🥉</div>
+									<n-flex :wrap="false" size="medium" class="scroll-container">
+										<img :src="renderStuffImg('309')" class="activity_stuff_img_2" />
+										<img :src="renderStuffImg('310')" class="activity_stuff_img_2" />
+										<img :src="renderStuffImg('311')" class="activity_stuff_img_2" />
+										<img :src="renderStuffImg('312')" class="activity_stuff_img_2" />
+									</n-flex>
+								</div>
+								<div class="activity_ranking_rewards">
+									<div class="activity_stuff_img_ranking" style="font-size: 1.5em;">4</div>
+									<n-flex :wrap="false" size="medium" class="scroll-container">
+										<img :src="renderStuffImg('313')" class="activity_stuff_img_2" />
+										<img :src="renderStuffImg('314')" class="activity_stuff_img_2" />
+										<img :src="renderStuffImg('315')" class="activity_stuff_img_2" />
+										<img :src="renderStuffImg('316')" class="activity_stuff_img_2" />
+									</n-flex>
+								</div>
+								<div class="activity_ranking_rewards">
+									<div class="activity_stuff_img_ranking" style="font-size: 1.5em;">5-8</div>
+									<n-flex :wrap="false" size="medium" class="scroll-container">
+										<img :src="renderStuffImg('317')" class="activity_stuff_img_2" />
+										<img :src="renderStuffImg('318')" class="activity_stuff_img_2" />
+										<img :src="renderStuffImg('319')" class="activity_stuff_img_2" />
+										<img :src="renderStuffImg('320')" class="activity_stuff_img_2" />
+									</n-flex>
+								</div>
+								<div class="activity_ranking_rewards">
+									<div class="activity_stuff_img_ranking" style="font-size: 1.5em;">9-16</div>
+									<n-flex :wrap="false" size="medium" class="scroll-container">
+										<img :src="renderStuffImg('321')" class="activity_stuff_img_2" />
+										<img :src="renderStuffImg('322')" class="activity_stuff_img_2" />
+										<img :src="renderStuffImg('323')" class="activity_stuff_img_2" />
+										<img :src="renderStuffImg('324')" class="activity_stuff_img_2" />
+									</n-flex>
+								</div>
+								<div class="activity_ranking_rewards">
+									<div class="activity_stuff_img_ranking" style="font-size: 1.5em;">17-32</div>
+									<n-flex :wrap="false" size="medium" class="scroll-container">
+										<img :src="renderStuffImg('325')" class="activity_stuff_img_2" />
+										<img :src="renderStuffImg('326')" class="activity_stuff_img_2" />
+										<img :src="renderStuffImg('327')" class="activity_stuff_img_2" />
+										<img :src="renderStuffImg('328')" class="activity_stuff_img_2" />
+									</n-flex>
+								</div>
+								<div class="activity_ranking_rewards">
+									<div class="activity_stuff_img_ranking" style="font-size: 1.5em;">33+</div>
+									<n-flex :wrap="false" size="medium" class="scroll-container">
+										<img :src="renderStuffImg('329')" class="activity_stuff_img_2" />
+										<img :src="renderStuffImg('330')" class="activity_stuff_img_2" />
+										<img :src="renderStuffImg('331')" class="activity_stuff_img_2" />
+										<img :src="renderStuffImg('332')" class="activity_stuff_img_2" />
+									</n-flex>
+								</div>
+							</n-tab-pane>
+							<n-tab-pane name="淘汰赛参战奖励">
+								<div>
+									<h2>军团奖励</h2>
+									<h4>军团获胜，军团成员将获得以下奖励</h4>
+									<n-flex :wrap="false" size="medium" class="scroll-container">
+										<img :src="renderStuffImg('401')" class="activity_stuff_img_3" />
+										<img :src="renderStuffImg('402')" class="activity_stuff_img_3" />
+										<img :src="renderStuffImg('403')" class="activity_stuff_img_3" />
+										<img :src="renderStuffImg('404')" class="activity_stuff_img_3" />
+										<img :src="renderStuffImg('405')" class="activity_stuff_img_3" />
+									</n-flex>
+									<h4>军团落败，军团成员将获得以下奖励</h4>
+									<n-flex :wrap="false" size="medium" class="scroll-container">
+										<img :src="renderStuffImg('406')" class="activity_stuff_img_3" />
+										<img :src="renderStuffImg('407')" class="activity_stuff_img_3" />
+										<img :src="renderStuffImg('408')" class="activity_stuff_img_3" />
+										<img :src="renderStuffImg('409')" class="activity_stuff_img_3" />
+										<img :src="renderStuffImg('410')" class="activity_stuff_img_3" />
+									</n-flex>
+								</div>
+								<div style="padding-top: 15px">
+									<h2>个人奖励</h2>
+									<h4>获胜军团的参战人员将根据各自取得的【个人军工积分】获得以下额外奖励</h4>
+									<h4>落败军团的参战人员将根据各自取得的【个人军工积分】获得以下额外奖励</h4>
+								</div>
+							</n-tab-pane>
+							<n-tab-pane name="争霸赛参战奖励">
+								<div>
+									<h2>军团奖励</h2>
+									<h4>军团获胜，军团成员将获得以下奖励</h4>
+									<n-flex :wrap="false" size="medium" class="scroll-container">
+										<img :src="renderStuffImg('401')" class="activity_stuff_img_3" />
+										<img :src="renderStuffImg('402')" class="activity_stuff_img_3" />
+										<img :src="renderStuffImg('403')" class="activity_stuff_img_3" />
+										<img :src="renderStuffImg('404')" class="activity_stuff_img_3" />
+										<img :src="renderStuffImg('405')" class="activity_stuff_img_3" />
+									</n-flex>
+									<h4>军团落败，军团成员将获得以下奖励</h4>
+									<n-flex :wrap="false" size="medium" class="scroll-container">
+										<img :src="renderStuffImg('406')" class="activity_stuff_img_3" />
+										<img :src="renderStuffImg('407')" class="activity_stuff_img_3" />
+										<img :src="renderStuffImg('408')" class="activity_stuff_img_3" />
+										<img :src="renderStuffImg('409')" class="activity_stuff_img_3" />
+										<img :src="renderStuffImg('410')" class="activity_stuff_img_3" />
+									</n-flex>
+								</div>
+								<div style="padding-top: 15px">
+									<h2>个人奖励</h2>
+									<h4>获胜军团的参战人员将根据各自取得的【个人军工积分】获得以下额外奖励</h4>
+									<h4>落败军团的参战人员将根据各自取得的【个人军工积分】获得以下额外奖励</h4>
+								</div>
+							</n-tab-pane>
+						</n-tabs>
+					</n-tab-pane>
 				</n-tabs>
 			</div>
 		</n-layout-content>
@@ -696,8 +968,8 @@ const renderBuildingImg = (name) => {
     return new URL(imgUrl, import.meta.url).href;
 }
 
-const renderActivityImg = (name) => {
-	const imgUrl = `${import.meta.env.BASE_URL}images/activity/xueYuBingQiLianSai/${name}.png`;
+const renderStuffImg = (name) => {
+	const imgUrl = `${import.meta.env.BASE_URL}images/activity/xueYuBingQiLianSai/stuff/${name}.png`;
     return new URL(imgUrl, import.meta.url).href;
 }
 
@@ -713,6 +985,100 @@ onMounted(() => {
 </script>
 
 <style scoped>
+.scroll-container {
+	width: 90%;
+  	overflow-x: auto;
+  	overflow-y: hidden;
+  	scrollbar-width: none;
+  	-ms-overflow-style: none;
+  	white-space: nowrap; 
+}
+
+.scroll-container::-webkit-scrollbar {
+	display: none;
+}
+
+.activity_stuff_img {
+	width: 108px;
+}
+
+.activity_stuff_img_ranking {
+	font-size: 3em; 
+	margin-right: 10px;
+	width: 70px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.activity_stuff_img_2 {
+	width: 60px;
+}
+
+.activity_stuff_img_3 {
+	width: 50px;
+}
+
+.activity_stuff_img_4 {
+	width: 45%;
+}
+
+.activity_ranking_rewards {
+	display: flex;
+	align-items: center;
+	margin-bottom: 15px;
+}
+
+.image-container {
+	position: relative;
+	display: inline-block;
+}
+
+.image-description {
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	color: white;
+	padding: 7px;
+	font-size: 1em;
+	font-weight: bolder;
+	text-align: right;
+}
+
+@media (min-width: 1024px) {
+	.activity_stuff_img {
+		width: 108px;
+	}
+
+	.activity_stuff_img_2 {
+		width: 80px;
+	}
+}
+
+@media (min-width: 2048px) {
+  	.activity_stuff_img {
+		width: 216px;
+	}
+
+	.activity_stuff_img_ranking {
+		font-size: 3.8em; 
+		margin-right: 30px;
+	}
+
+	.activity_stuff_img {
+		width: 108px;
+	}
+
+	.activity_stuff_img_2 {
+		width: 80px;
+	}
+
+	.activity_stuff_img_4 {
+		width: 250px;
+	}
+}
+
 /* 重置默认列表样式 */
 ol {
 	list-style: none;

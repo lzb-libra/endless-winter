@@ -20,6 +20,7 @@
                                     <n-image width="25" :src="renderType()" preview-disabled />
                                     <span style="font-size: large; padding-left: 10px;">{{ showExpertDetail.type }}</span>
                                 </div>
+                                <div style="padding-top: 5px;">{{ showExpertDetail.typeDesc }}</div>
                             </div>
                         </div>
                         <n-divider />

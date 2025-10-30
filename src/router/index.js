@@ -7,6 +7,8 @@ import Expert from "../views/Expert.vue";
 import Logs from "../views/Logs.vue";
 import Chat from "../views/Chat.vue";
 
+import Seat from "../views/tools/Seat.vue"
+
 const routes = [
 	{ path: "/", redirect: "/hero" },
 	{ path: "/hero", name: "Hero", component: Hero },
@@ -15,6 +17,7 @@ const routes = [
 	{ path: "/chat", name: "Chat", component: Chat },
 	{ path: "/expert", name: "Expert", component: Expert },
 	{ path: "/activity", name: "Activity", component: Activity },
+	{ path: "/seat", name: "Seat", component: Seat },
 	{ path: "/logs", name: "Logs", component: Logs },
 ];
 
