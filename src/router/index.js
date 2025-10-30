@@ -7,10 +7,10 @@ import Expert from "../views/Expert.vue";
 import Logs from "../views/Logs.vue";
 import Chat from "../views/Chat.vue";
 
-import Seat from "../views/tools/Seat.vue"
+import Seat from "../views/tools/Seat.vue";
 
 const routes = [
-	{ path: "/", redirect: "/hero" },
+	{ path: "/", redirect: "/seat" },
 	{ path: "/hero", name: "Hero", component: Hero },
 	{ path: "/heroDetail/:id", name: "HeroDetail", component: HeroDetail },
 	{ path: "/pet", name: "Pet", component: Pet },
