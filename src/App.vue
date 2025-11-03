@@ -5,7 +5,9 @@
 				<n-menu v-model:value="activeKey" mode="horizontal" :options="menuOptions" responsive />
 			</n-layout-header>
 			<n-layout-content position="absolute" style="padding: 52px 5vw 70px 5vw;" bordered>
-				<router-view />
+				<n-message-provider>
+					<router-view />
+				</n-message-provider>
 			</n-layout-content>
 			<n-layout-footer position="absolute" style="text-align: center; padding: 15px 5vw;" bordered>
 				<span style="padding-right: 3px;">{{ `Copyright &copy; ${new Date().getFullYear()}` }}</span>
