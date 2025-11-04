@@ -1,34 +1,31 @@
 <template>
   <div>
     <div style="display: flex; padding-bottom: 10px;">
-      <n-upload :default-upload="false" :multiple="true" :show-retry-button="true" :show-file-list="false" accept="image/*"
-        v-model:file-list="fileList" @change="handleUploadChange" style="margin-right: 10px; width: 100px;">
+      <n-upload :default-upload="false" :multiple="true" :show-retry-button="true" :show-file-list="false"
+        accept="image/*" v-model:file-list="fileList" @change="handleUploadChange"
+        style="margin-right: 10px; width: 85px;">
         <n-button>上传图片</n-button>
       </n-upload>
-      <n-button @click="showPlayerSeatChart" style="margin-right: 10px; width: 100px;">座位地图</n-button>
-      <n-upload :default-upload="false" :multiple="false" :show-retry-button="true" :show-file-list="false" accept=".json"
-        v-model:file-list="fileList" @change="handleUploadChangeJson" style="margin-right: 10px; width: 100px;">
+      <n-button @click="showPlayerSeatChart" style="margin-right: 10px; width: 85px;">座位地图</n-button>
+      <n-upload :default-upload="false" :multiple="false" :show-retry-button="true" :show-file-list="false"
+        accept=".json" v-model:file-list="fileList" @change="handleUploadChangeJson"
+        style="margin-right: 10px; width: 85px;">
         <n-button>导入配置</n-button>
       </n-upload>
-      <n-button @click="exportToJSON" style="margin-right: 10px; width: 100px;">导出配置</n-button>
+      <n-button @click="exportToJSON" style="margin-right: 10px; width: 85px;">导出配置</n-button>
     </div>
     <div style="display: flex; align-items: center; padding-bottom: 10px;">
       <n-progress style="flex: 1;" type="line" :percentage="percentage" indicator-placement="inside" />
       <span style="padding-left: 10px;">{{ count }} / {{ fileList.length }}</span>
     </div>
-    <n-data-table :columns="columns" :data="tableData" :pagination="false" style="height: 1000px;" @update:sorter="handleSorterChange" :key="row => row.key" :bordered="false" flex-height striped />
-    
+    <n-data-table :columns="columns" :data="tableData" :pagination="pagination" style="height: 1030px;"
+      :key="row => row.key" :bordered="false" flex-height striped />
+
     <n-modal v-model:show="showTableDetailModal" style="width: 800px;">
       <n-card>
         <div style="display: flex; justify-content: space-between;">
-          <n-form
-            ref="formRef"
-            :model="showTableDetail"
-            label-placement="left"
-            label-width="auto"
-            require-mark-placement="right-hanging"
-            size="medium"
-          >
+          <n-form ref="formRef" :model="showTableDetail" label-placement="left" label-width="auto"
+            require-mark-placement="right-hanging" size="medium">
             <n-form-item label="角色名称" path="name">
               <n-input v-model:value="showTableDetail.name" />
             </n-form-item>
@@ -84,7 +81,10 @@
                 <n-list-item v-for="obj in seatCanvasDatum" @click="locatePlayerPosition(obj)">
                   <div style="display: flex;">
                     <div v-if="selectedPlayer && selectedPlayer.name === obj.name" style="padding-right: 10px;">✅</div>
-                    <div>{{ obj.name }}</div>
+                    <div style="display: flex; justify-content: space-between; width: 100%;">
+                      <div>{{ obj.name }}</div>
+                      <div>{{ obj[selectSortField] }}</div>
+                    </div>
                   </div>
                 </n-list-item>
               </n-list>
@@ -94,19 +94,42 @@
         </div>
       </n-card>
     </n-modal>
+
+    <n-modal v-model:show="showSelectSortFieldModal" preset="dialog" title="请选择一项进行排序" positive-text="确认"
+      negative-text="取消" @positive-click="selectSortFieldPositive"
+      @negative-click="showSelectSortFieldModal = !showSelectSortFieldModal">
+      <n-select v-model:value="selectSortField" :options="selectSortFieldOptions" placeholder="请选择" />
+    </n-modal>
   </div>
 </template>
 
 <script setup>
-import { ref, onMounted, onUnmounted, watch, nextTick, h } from 'vue';
+import { ref, onMounted, onUnmounted, watch, nextTick, h, reactive } from 'vue';
 import { createWorker } from 'tesseract.js';
 import { NButton, useMessage } from 'naive-ui';
 
 const message = useMessage();
 
 const timerId = setInterval(() => {
-  if(pendingDatum.value.size > 0 && !pendingStatus.value) recognizeImg();
+  if (pendingDatum.value.size > 0 && !pendingStatus.value) recognizeImg();
 }, 1000);
+
+const selectSortFieldOptions = [
+  { label: '盾兵攻击力', value: 'dbgjl' },
+  { label: '盾兵防御力', value: 'dbfyl' },
+  { label: '盾兵穿透力', value: 'dbctl' },
+  { label: '盾兵生命力', value: 'dbsml' },
+
+  { label: '矛兵攻击力', value: 'mbgjl' },
+  { label: '矛兵防御力', value: 'mbfyl' },
+  { label: '矛兵穿透力', value: 'mbctl' },
+  { label: '矛兵生命力', value: 'mbsml' },
+
+  { label: '射手攻击力', value: 'ssgjl' },
+  { label: '射手防御力', value: 'ssfyl' },
+  { label: '射手穿透力', value: 'ssctl' },
+  { label: '射手生命力', value: 'sssml' },
+]
 
 const columns = [
   {
@@ -226,6 +249,19 @@ const boxText = '🐻';                 // 你想要显示的文字，比如 "A1
 const boxTextColor = '#000';           // 文字颜色
 const boxTextSize = 64;                 // 文字字号（像素）
 
+// 表格分页
+const pagination = reactive({
+  page: 1,
+  pageSize: 20,
+  showSizePicker: false,
+  onChange: (page) => {
+    pagination.page = page
+  },
+  onUpdatePageSize: (pageSize) => {
+    pagination.pageSize = pageSize
+    pagination.page = 1
+  }
+});
 // 表格数据
 const tableData = ref([]);
 // 上传的文件对象
@@ -242,6 +278,9 @@ const pendingDatum = ref(new Map());
 const showTableDetail = ref({});
 // 是否玩家详情信息弹窗
 const showTableDetailModal = ref(false);
+// 选择的排序方式
+const selectSortField = ref('');
+const showSelectSortFieldModal = ref(false);
 // 是否显示座位图
 const showSeatCanvasModal = ref(false);
 // 座位图数据
@@ -251,36 +290,16 @@ const selectedPlayer = ref(null);
 // 地图对象
 const seatCanvas = ref(null);
 
-// 表格排序触发的函数
-const handleSorterChange = (sorter) => {
-  if (sorter.order === false) {
-    seatCanvasDatum.value = [...tableData.value];
-  } else {
-    seatCanvasDatum.value = [...tableData.value].sort((a, b) => {
-      console.log(sorter.columnKey, a, b)
-      const valA = Number(a[sorter.columnKey]);
-      const valB = Number(b[sorter.columnKey]);
-
-      if (isNaN(valA)) return 1;
-      if (isNaN(valB)) return -1;
-
-      return sorter.order === 'descend' ? valB - valA : valA - valB;
-    });
-  }
-};
-
 // 图片上传
 const handleUploadChange = async (fielInfo) => {
   console.log(fielInfo)
 
-  // showModal.value = true;
   const imgFile = fielInfo.file.file;
 
   const img = new Image()
   img.src = URL.createObjectURL(imgFile)
 
   img.onload = async () => {
-    // 创建离屏 Canvas
     const offCanvas = document.createElement('canvas');
     const ctx = offCanvas.getContext('2d');
     offCanvas.width = img.width;
@@ -323,19 +342,16 @@ const recognizeImg = async () => {
   const { data: result } = await worker.recognize(obj.get('canvas'))
 
   const playerData = parsePlayerData(result, obj.get('file'));
-  if(playerData) {
+  if (playerData) {
     const reader = new FileReader();
     reader.onload = (e) => {
       playerData['imgUrl'] = e.target.result;
       playerData['imgId'] = key;
-    
+
       tableData.value.push(playerData);
-      // seatCanvasDatum.value = [...tableData.value];
 
       count.value++;
       percentage.value = ((count.value / fileList.value.length) * 100).toFixed(0);
-
-      // drawSeat();
     }
     reader.readAsDataURL(obj.get('file'));
   }
@@ -352,80 +368,107 @@ const parsePlayerData = (result, file) => {
   const playerData = {};
   const lines = result.text.split(/\r?\n/);
   for (const item of lines) {
-    if(!playerData['name'] && (item.includes('QGD') || item.includes('FUN'))) {
+    if (!playerData['name'] && (item.includes('QGD') || item.includes('FUN'))) {
       let cleaned = item.replace(/^.*?【QGD】/i, '').replace(/^.*?【FUN】/i, '');
       cleaned = cleaned.replace(/^.*?\[QGD\]/i, '').replace(/^.*?\[FUN\]/i, '');
       cleaned = cleaned.split(' ').filter(item => item.trim() !== '');
       playerData['name'] = cleaned[0];
     }
-    if(!playerData['name']) playerData['name'] = file.name.replace('.png', '');
+    if (!playerData['name']) playerData['name'] = file.name.replace('.png', '');
 
     if (item.includes('盾兵攻')) {
       const cleaned = item.split(' ').filter(item => item.trim() !== '')
-      playerData['dbgjl'] = Math.trunc(Number(cleaned[1].replace("%", "").replace("+", "")) * 10) / 10
+      playerData['dbgjl'] = cleanPercent(cleaned[1]);
     }
     if (item.includes('盾兵防')) {
       const cleaned = item.split(' ').filter(item => item.trim() !== '')
-      playerData['dbfyl'] = Math.trunc(Number(cleaned[1].replace("%", "").replace("+", "")) * 10) / 10
+      playerData['dbfyl'] = cleanPercent(cleaned[1]);
     }
     if (item.includes('盾兵穿')) {
       const cleaned = item.split(' ').filter(item => item.trim() !== '')
-      playerData['dbctl'] = Math.trunc(Number(cleaned[1].replace("%", "").replace("+", "")) * 10) / 10
+      playerData['dbctl'] = cleanPercent(cleaned[1]);
     }
     if (item.includes('盾兵生')) {
       const cleaned = item.split(' ').filter(item => item.trim() !== '')
-      playerData['dbsml'] = Math.trunc(Number(cleaned[1].replace("%", "").replace("+", "")) * 10) / 10
+      playerData['dbsml'] = cleanPercent(cleaned[1]);
     }
 
     if (item.includes('矛兵攻')) {
       const cleaned = item.split(' ').filter(item => item.trim() !== '')
-      playerData['mbgjl'] = Math.trunc(Number(cleaned[1].replace("%", "").replace("+", "")) * 10) / 10
+      playerData['mbgjl'] = cleanPercent(cleaned[1]);
     }
     if (item.includes('矛兵防')) {
       const cleaned = item.split(' ').filter(item => item.trim() !== '')
-      playerData['mbfyl'] = Math.trunc(Number(cleaned[1].replace("%", "").replace("+", "")) * 10) / 10
+      playerData['mbfyl'] = cleanPercent(cleaned[1]);
     }
     if (item.includes('矛兵穿')) {
       const cleaned = item.split(' ').filter(item => item.trim() !== '')
-      playerData['mbctl'] = Math.trunc(Number(cleaned[1].replace("%", "").replace("+", "")) * 10) / 10
+      playerData['mbctl'] = cleanPercent(cleaned[1]);
     }
     if (item.includes('矛兵生')) {
       const cleaned = item.split(' ').filter(item => item.trim() !== '')
-      playerData['mbsml'] = Math.trunc(Number(cleaned[1].replace("%", "").replace("+", "")) * 10) / 10
+      playerData['mbsml'] = cleanPercent(cleaned[1]);
     }
 
     if (item.includes('射手攻')) {
       const cleaned = item.split(' ').filter(item => item.trim() !== '')
-      playerData['ssgjl'] = Math.trunc(Number(cleaned[1].replace("%", "").replace("+", "")) * 10) / 10
+      playerData['ssgjl'] = cleanPercent(cleaned[1]);
     }
     if (item.includes('射手防')) {
       const cleaned = item.split(' ').filter(item => item.trim() !== '')
-      playerData['ssfyl'] = Math.trunc(Number(cleaned[1].replace("%", "").replace("+", "")) * 10) / 10
+      playerData['ssfyl'] = cleanPercent(cleaned[1]);
     }
     if (item.includes('射手穿')) {
       const cleaned = item.split(' ').filter(item => item.trim() !== '')
-      playerData['ssctl'] = Math.trunc(Number(cleaned[1].replace("%", "").replace("+", "")) * 10) / 10
+      playerData['ssctl'] = cleanPercent(cleaned[1]);
     }
     if (item.includes('射手生')) {
       const cleaned = item.split(' ').filter(item => item.trim() !== '')
-      playerData['sssml'] = Math.trunc(Number(cleaned[1].replace("%", "").replace("+", "")) * 10) / 10
+      playerData['sssml'] = cleanPercent(cleaned[1]);
     }
   }
 
   return playerData;
 }
 
-// 展示座位布局图
-const showPlayerSeatChart = async () => {
-  if(tableData.value.length === 0) {
-    message.warning("请先上传玩家数据!!!");
-    return;
-  }
+// 将数值处理成保留一位小数的数字字符串
+const cleanPercent = (str) => {
+  // 1. 去掉 "+" 和 "%" 符号
+  const numStr = str.replace(/[+%]/g, "").trim();
+
+  // 2. 转成数字
+  const num = Number(numStr);
+
+  // 3. 截断到一位小数（不四舍五入）
+  const truncated = Math.trunc(num * 10) / 10;
+
+  // 4. 转回字符串（保留 1 位小数）
+  return truncated.toFixed(1).trim();
+}
+
+// 选择字段后的确认
+const selectSortFieldPositive = async () => {
+  seatCanvasDatum.value = [...tableData.value].sort((a, b) => {
+    const x = Number(String(a[selectSortField.value]).trim());
+    const y = Number(String(b[selectSortField.value]).trim());
+    if (x === y) return 0;
+    return x > y ? -1 : 1;
+  });
 
   showSeatCanvasModal.value = true;
   await nextTick();
 
   drawSeatMap();
+}
+
+// 展示座位布局图
+const showPlayerSeatChart = () => {
+  // if (tableData.value.length === 0) {
+  //   message.warning("请先上传玩家数据!!!");
+  //   return;
+  // }
+
+  showSelectSortFieldModal.value = true;
 }
 
 // 绘制座位地图
@@ -459,7 +502,7 @@ const drawSeatMap = () => {
     ctx.lineTo(canvas.width, y)
     ctx.stroke()
   }
-  
+
   // 画布中心点坐标
   const canvasCenterX = canvas.width / 2
   const canvasCenterY = canvas.height / 2
@@ -486,9 +529,9 @@ const drawSeatMap = () => {
   ctx.fillRect(boxLeft, boxTop, boxWidth, boxHeight)
 
   ctx.fillStyle = boxTextColor
-  ctx.font = `${boxTextSize}px Arial` // 字体大小与类型
-  ctx.textAlign = 'center'           // 水平居中
-  ctx.textBaseline = 'middle'        // 垂直居中
+  ctx.font = `${boxTextSize}px Arial`
+  ctx.textAlign = 'center'
+  ctx.textBaseline = 'middle'
   const textX = boxLeft + boxWidth / 2
   const textY = boxTop + boxHeight / 2
 
@@ -516,9 +559,9 @@ const drawSeatMap = () => {
     ctx.fillRect(pixelX, pixelY, gridSize, gridSize)
 
     const text = '🚩'
-    ctx.font = '32px Arial' // 字号和字体（可调整，如 '14px sans-serif'）
-    ctx.textAlign = 'center' // 水平居中
-    ctx.textBaseline = 'middle' // 垂直居中
+    ctx.font = '32px Arial'
+    ctx.textAlign = 'center'
+    ctx.textBaseline = 'middle'
     const textX = pixelX + gridSize / 2
     const textY = pixelY + gridSize / 2
 
@@ -581,12 +624,14 @@ const drawSeatMap = () => {
 const drawPlayerSeat = (ctx, key, seatX, seatY, i, j) => {
   const keys = seatKey.get(key);
   let label = keys.get(i + "")[j];
+  console.log("label(index) => " + label)
 
   if (tableData.value.length >= label) {
     label = tableData.value[label - 1].name
+    console.log("label => " + label)
   }
 
-  ctx.fillStyle = label === selectedPlayer.value?.name ? "#f00": "#fff"
+  ctx.fillStyle = label === selectedPlayer.value?.name ? "#f00" : "#fff"
   ctx.fillRect(seatX, seatY, gridSize * 2, gridSize * 2)
 
   ctx.lineWidth = 1
@@ -638,7 +683,7 @@ const exportToJSON = () => {
 // 检索玩家
 const inputChange = (val) => {
   console.log(val);
-  if(val) {
+  if (val) {
     seatCanvasDatum.value = seatCanvasDatum.value.filter(item => item.name.includes(val));
   } else {
     seatCanvasDatum.value = [...tableData.value]
@@ -655,22 +700,22 @@ const inputClear = () => {
 
 // 选中玩家并定位
 const locatePlayerPosition = (obj) => {
-  if(!selectedPlayer.value || (selectedPlayer.value && selectedPlayer.value.name !== obj.name)) {
+  if (!selectedPlayer.value || (selectedPlayer.value && selectedPlayer.value.name !== obj.name)) {
     selectedPlayer.value = obj;
-  } else if(selectedPlayer.value && selectedPlayer.value.name === obj.name) {
+  } else if (selectedPlayer.value && selectedPlayer.value.name === obj.name) {
     selectedPlayer.value = null;
   }
-  
+
   drawSeatMap();
 }
 
 watch(tableData, () => {
   seatCanvasDatum.value = [...tableData.value]
-}, { deep: true } );
+}, { deep: true });
 
-onMounted(async () => {});
+onMounted(async () => { });
 
-onUnmounted(async () => { 
+onUnmounted(async () => {
   clearInterval(timerId);
 });
 </script>
