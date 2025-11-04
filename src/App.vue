@@ -26,7 +26,16 @@ const route = useRoute();
 const activeKey = ref("hero");
 const isDarkMode = ref(false);
 
-const darkModeQuery = window.matchMedia('(prefers-color-scheme: dark)')
+const darkModeQuery = window.matchMedia('(prefers-color-scheme: dark)');
+
+const isPC = () => {
+  const ua = navigator.userAgent.toLowerCase();
+  const mobiles = ['mobile', 'android', 'iphone', 'ipod', 'ipad', 'windows phone'];
+  for (let m of mobiles) {
+    if (ua.includes(m)) return false;
+  }
+  return true;
+}
 
 const menuOptions = [
 	{
@@ -94,19 +103,20 @@ const menuOptions = [
 			),
 		key: "chat",
 	},
-	// {
-	// 	label: () =>
-	// 		h(
-	// 			RouterLink,
-	// 			{
-	// 				to: {
-	// 					name: "Seat",
-	// 				},
-	// 			},
-	// 			{ default: () => "工具" }
-	// 		),
-	// 	key: "seat",
-	// },
+	{
+		label: () =>
+			h(
+				RouterLink,
+				{
+					to: {
+						name: "Seat",
+					},
+				},
+				{ default: () => "工具" }
+			),
+		key: "seat",
+		show: isPC(),
+	},
 	{
 		label: () =>
 			h(

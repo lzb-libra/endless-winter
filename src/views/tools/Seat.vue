@@ -2,23 +2,22 @@
   <div>
     <div style="display: flex; padding-bottom: 10px;">
       <n-upload :default-upload="false" :multiple="true" :show-retry-button="true" :show-file-list="false" accept="image/*"
-        v-model:file-list="fileList" @change="handleUploadChange" style="width: 100px;">
+        v-model:file-list="fileList" @change="handleUploadChange" style="margin-right: 10px; width: 100px;">
         <n-button>上传图片</n-button>
       </n-upload>
-      <n-button @click="showPlayerSeatChart">座位图</n-button>
-      <n-upload :default-upload="false" :multiple="true" :show-retry-button="true" :show-file-list="false" accept=".json"
-        v-model:file-list="fileList" @change="handleUploadChange" style="width: 100px;">
+      <n-button @click="showPlayerSeatChart" style="margin-right: 10px; width: 100px;">座位地图</n-button>
+      <n-upload :default-upload="false" :multiple="false" :show-retry-button="true" :show-file-list="false" accept=".json"
+        v-model:file-list="fileList" @change="handleUploadChangeJson" style="margin-right: 10px; width: 100px;">
         <n-button>导入配置</n-button>
       </n-upload>
-      <n-button @click="exportToJSON">导出配置</n-button>
+      <n-button @click="exportToJSON" style="margin-right: 10px; width: 100px;">导出配置</n-button>
     </div>
     <div style="display: flex; align-items: center; padding-bottom: 10px;">
       <n-progress style="flex: 1;" type="line" :percentage="percentage" indicator-placement="inside" />
       <span style="padding-left: 10px;">{{ count }} / {{ fileList.length }}</span>
     </div>
-    <n-data-table :columns="columns" :data="tableData" :pagination="false" style="height: 1000px;"
-          @update:sorter="handleSorterChange" :key="row => row.key" :bordered="false" flex-height striped />
-
+    <n-data-table :columns="columns" :data="tableData" :pagination="false" style="height: 1000px;" @update:sorter="handleSorterChange" :key="row => row.key" :bordered="false" flex-height striped />
+    
     <n-modal v-model:show="showTableDetailModal" style="width: 800px;">
       <n-card>
         <div style="display: flex; justify-content: space-between;">
@@ -63,8 +62,8 @@
             <n-form-item label="射手防御力" path="ssfyl">
               <n-input v-model:value="showTableDetail.ssfyl" type="number" />
             </n-form-item>
-            <n-form-item label="射手穿透力" path="sssml">
-              <n-input v-model:value="showTableDetail.sssml" type="number" />
+            <n-form-item label="射手穿透力" path="ssctl">
+              <n-input v-model:value="showTableDetail.ssctl" type="number" />
             </n-form-item>
             <n-form-item label="射手生命力" path="sssml">
               <n-input v-model:value="showTableDetail.sssml" type="number" />
@@ -75,19 +74,31 @@
       </n-card>
     </n-modal>
 
-    <n-modal
-      v-model:show="showSeatCanvasModal"
-      style="width: 90vw; height: 100vh;"
-    >
+    <n-modal v-model:show="showSeatCanvasModal" style="width: 90vw; height: 100vh;">
       <n-card>
-        123
+        <div style="display: flex; justify-content: space-between;">
+          <div style="width: 300px;">
+            <n-input placeholder="搜索" style="margin-bottom: 8px;" @input="inputChange" @clear="inputClear" clearable />
+            <div style="overflow-y: auto; height: 92vh;">
+              <n-list hoverable clickable>
+                <n-list-item v-for="obj in seatCanvasDatum" @click="locatePlayerPosition(obj)">
+                  <div style="display: flex;">
+                    <div v-if="selectedPlayer && selectedPlayer.name === obj.name" style="padding-right: 10px;">✅</div>
+                    <div>{{ obj.name }}</div>
+                  </div>
+                </n-list-item>
+              </n-list>
+            </div>
+          </div>
+          <canvas ref="seatCanvas" :width="1900" :height="1150"></canvas>
+        </div>
       </n-card>
     </n-modal>
   </div>
 </template>
 
 <script setup>
-import { ref, onMounted, onUnmounted, h } from 'vue';
+import { ref, onMounted, onUnmounted, watch, nextTick, h } from 'vue';
 import { createWorker } from 'tesseract.js';
 import { NButton, useMessage } from 'naive-ui';
 
@@ -120,69 +131,103 @@ const columns = [
   {
     title: '盾兵攻击力',
     key: "dbgjl",
-    sorter: 'default'
+    sorter: (row1, row2) => row1.dbgjl - row2.dbgjl
   },
   {
     title: '盾兵防御力',
     key: "dbfyl",
-    sorter: 'default'
+    ssorter: (row1, row2) => row1.dbfyl - row2.dbfyl
   },
   {
     title: '盾兵穿透力',
     key: "dbctl",
-    sorter: 'default'
+    sorter: (row1, row2) => row1.dbctl - row2.dbctl
   },
   {
     title: '盾兵生命力',
     key: "dbsml",
-    sorter: 'default'
+    sorter: (row1, row2) => row1.dbsml - row2.dbsml
   },
   {
     title: '矛兵攻击力',
     key: "mbgjl",
-    sorter: 'default'
+    sorter: (row1, row2) => row1.mbgjl - row2.mbgjl
   },
   {
     title: '矛兵防御力',
     key: "mbfyl",
-    sorter: 'default'
+    sorter: (row1, row2) => row1.mbfyl - row2.mbfyl
   },
   {
     title: '矛兵穿透力',
     key: "mbctl",
-    sorter: 'default'
+    sorter: (row1, row2) => row1.mbctl - row2.mbctl
   },
   {
     title: '矛兵生命力',
     key: "mbsml",
-    sorter: 'default'
+    sorter: (row1, row2) => row1.mbsml - row2.mbsml
   },
   {
     title: '射手攻击力',
     key: "ssgjl",
-    sorter: 'default'
+    sorter: (row1, row2) => row1.ssgjl - row2.ssgjl
   },
   {
     title: '射手防御力',
     key: "ssfyl",
-    sorter: 'default'
+    sorter: (row1, row2) => row1.ssfyl - row2.ssfyl
   },
   {
     title: '射手穿透力',
     key: "ssctl",
-    sorter: 'default'
+    sorter: (row1, row2) => row1.ssctl - row2.ssctl
   },
   {
     title: '射手生命力',
     key: "sssml",
-    sorter: 'default'
+    sorter: (row1, row2) => row1.sssml - row2.sssml
   }
 ]
 
-// 表格数据
-const tableData = ref([
-  // {"name":"请","dbgjl":579.8,"dbfyl":583.9,"dbctl":382.6,"dbsml":343,"mbgjl":634.6,"mbfyl":648.1,"mbctl":512.2,"mbsml":445.9,"ssgjl":578.6,"ssfyl":577.8,"ssctl":333.3,"sssml":283.2,"fileId":"60763a05"}
+const seatKey = new Map([
+  ['north', new Map([
+    ['0', [5, 1, 9, 25, 45, 61]],
+    ['1', [17, 13, 21, 29, 53, 65]],
+    ['2', [37, 33, 41, 49, 57, 69]],
+  ])],
+  ['east', new Map([
+    ['0', [6, 2, 10, 26, 46, 62]],
+    ['1', [18, 14, 22, 30, 54, 66]],
+    ['2', [38, 34, 42, 50, 58, 70]],
+  ])],
+  ['south', new Map([
+    ['0', [7, 3, 11, 27, 47, 63]],
+    ['1', [19, 15, 23, 31, 55, 67]],
+    ['2', [39, 35, 43, 51, 59, 71]],
+  ])],
+  ['west', new Map([
+    ['0', [8, 4, 12, 28, 48, 64]],
+    ['1', [20, 16, 24, 32, 56, 68]],
+    ['2', [40, 36, 44, 52, 60, 72]],
+  ])],
 ]);
+
+// 画布网格参数
+const gridSize = 50;      // 每个格子的宽高（像素）
+const gridColor = '#ddd'; // 网格线颜色
+const lineWidth = 1;      // 网格线宽度
+
+// 3x3 方框参数
+const boxGridWidth = 3;
+const boxGridHeight = 3;
+const boxBackgroundColor = '#e3f2fd';  // 浅蓝色背景（可自定义，如 '#f0f0f0'、'#cce7ff' 等）
+const boxText = '🐻';                 // 你想要显示的文字，比如 "A1", "座位1", "🪑"
+const boxTextColor = '#000';           // 文字颜色
+const boxTextSize = 64;                 // 文字字号（像素）
+
+// 表格数据
+const tableData = ref([]);
 // 上传的文件对象
 const fileList = ref([]);
 // 识别数量
@@ -199,23 +244,29 @@ const showTableDetail = ref({});
 const showTableDetailModal = ref(false);
 // 是否显示座位图
 const showSeatCanvasModal = ref(false);
+// 座位图数据
+const seatCanvasDatum = ref({});
+// 当前选中的玩家
+const selectedPlayer = ref(null);
+// 地图对象
+const seatCanvas = ref(null);
 
 // 表格排序触发的函数
 const handleSorterChange = (sorter) => {
-  console.log(sorter);
-  // if (sorter.order === false) {
-  //   seatDatum.value = [...tableData.value];
-  // } else {
-  //   seatDatum.value = [...tableData.value].sort((a, b) => {
-  //     const valA = Number(a[sorter.columnKey]);
-  //     const valB = Number(b[sorter.columnKey]);
+  if (sorter.order === false) {
+    seatCanvasDatum.value = [...tableData.value];
+  } else {
+    seatCanvasDatum.value = [...tableData.value].sort((a, b) => {
+      console.log(sorter.columnKey, a, b)
+      const valA = Number(a[sorter.columnKey]);
+      const valB = Number(b[sorter.columnKey]);
 
-  //     if (isNaN(valA)) return 1;
-  //     if (isNaN(valB)) return -1;
+      if (isNaN(valA)) return 1;
+      if (isNaN(valB)) return -1;
 
-  //     return sorter.order === 'descend' ? valB - valA : valA - valB;
-  //   });
-  // }
+      return sorter.order === 'descend' ? valB - valA : valA - valB;
+    });
+  }
 };
 
 // 图片上传
@@ -279,7 +330,7 @@ const recognizeImg = async () => {
       playerData['imgId'] = key;
     
       tableData.value.push(playerData);
-      // seatDatum.value = [...tableData.value];
+      // seatCanvasDatum.value = [...tableData.value];
 
       count.value++;
       percentage.value = ((count.value / fileList.value.length) * 100).toFixed(0);
@@ -365,13 +416,206 @@ const parsePlayerData = (result, file) => {
 }
 
 // 展示座位布局图
-const showPlayerSeatChart = () => {
+const showPlayerSeatChart = async () => {
   if(tableData.value.length === 0) {
     message.warning("请先上传玩家数据!!!");
     return;
   }
 
   showSeatCanvasModal.value = true;
+  await nextTick();
+
+  drawSeatMap();
+}
+
+// 绘制座位地图
+const drawSeatMap = () => {
+  const canvas = seatCanvas.value
+  if (!canvas) return
+
+  const ctx = canvas.getContext('2d')
+  if (!ctx) return
+
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+  // ============================
+  // 绘制网格
+  // ============================
+  ctx.strokeStyle = gridColor
+  ctx.lineWidth = lineWidth
+
+  // 绘制垂直线
+  for (let x = 0; x <= canvas.width; x += gridSize) {
+    ctx.beginPath()
+    ctx.moveTo(x, 0)
+    ctx.lineTo(x, canvas.height)
+    ctx.stroke()
+  }
+
+  // 绘制水平线
+  for (let y = 0; y <= canvas.height; y += gridSize) {
+    ctx.beginPath()
+    ctx.moveTo(0, y)
+    ctx.lineTo(canvas.width, y)
+    ctx.stroke()
+  }
+  
+  // 画布中心点坐标
+  const canvasCenterX = canvas.width / 2
+  const canvasCenterY = canvas.height / 2
+
+  // ============================
+  // 绘制 3x3 的方框 - 中间熊坑
+  // ============================
+  const boxWidth = boxGridWidth * gridSize
+  const boxHeight = boxGridHeight * gridSize
+
+  const desiredCenterX = canvasCenterX
+  const desiredCenterY = canvasCenterY
+
+  const desiredLeft = desiredCenterX - boxWidth / 2
+  const desiredTop = desiredCenterY - boxHeight / 2
+
+  const alignedLeft = Math.round(desiredLeft / gridSize) * gridSize
+  const alignedTop = Math.round(desiredTop / gridSize) * gridSize
+
+  const boxLeft = alignedLeft
+  const boxTop = alignedTop
+
+  ctx.fillStyle = boxBackgroundColor
+  ctx.fillRect(boxLeft, boxTop, boxWidth, boxHeight)
+
+  ctx.fillStyle = boxTextColor
+  ctx.font = `${boxTextSize}px Arial` // 字体大小与类型
+  ctx.textAlign = 'center'           // 水平居中
+  ctx.textBaseline = 'middle'        // 垂直居中
+  const textX = boxLeft + boxWidth / 2
+  const textY = boxTop + boxHeight / 2
+
+  ctx.fillText(boxText, textX, textY + 5)
+
+  // ============================
+  // 绘制 1x1 的方框 - 四周的旗子
+  // ============================
+  const startGridX = Math.floor(boxLeft / gridSize)
+  const startGridY = Math.floor(boxTop / gridSize)
+
+  const smallBoxes = [
+    { x: startGridX - 1, y: startGridY - 1 }, // 左上
+    { x: startGridX + 3, y: startGridY - 1 }, // 右上
+    { x: startGridX - 1, y: startGridY + 3 }, // 左下
+    { x: startGridX + 3, y: startGridY + 3 }, // 右下
+  ]
+
+  smallBoxes.forEach(({ x, y }) => {
+    const pixelX = x * gridSize
+    const pixelY = y * gridSize
+
+    // 背景
+    ctx.fillStyle = "#66bb6a"
+    ctx.fillRect(pixelX, pixelY, gridSize, gridSize)
+
+    const text = '🚩'
+    ctx.font = '32px Arial' // 字号和字体（可调整，如 '14px sans-serif'）
+    ctx.textAlign = 'center' // 水平居中
+    ctx.textBaseline = 'middle' // 垂直居中
+    const textX = pixelX + gridSize / 2
+    const textY = pixelY + gridSize / 2
+
+    ctx.fillText(text, textX, textY)
+  })
+
+  // ============================
+  // 绘制 2x2 的方框
+  // ============================
+  // 北环
+  const oneRingNorthSeat = [-1, 1, 3, 5, 7, 9];
+  for (let i = 0; i < 3; i++) {
+    for (let j = 0; j < oneRingNorthSeat.length; j++) {
+      const value = oneRingNorthSeat[j]
+      let seatX = (startGridX + value) * gridSize;
+      let seatY = (startGridY - (3 + (i * 2))) * gridSize;
+
+      drawPlayerSeat(ctx, 'north', seatX, seatY, i, j)
+    }
+  }
+
+  // 东环
+  const oneRingEastSeat = [-1, 1, 3, 5, 7, 9];
+  for (let i = 0; i < 3; i++) {
+    for (let j = 0; j < oneRingEastSeat.length; j++) {
+      const value = oneRingEastSeat[j]
+      let seatX = (startGridX + (4 + (i * 2))) * gridSize;
+      let seatY = (startGridY + value) * gridSize;
+
+      drawPlayerSeat(ctx, 'east', seatX, seatY, i, j)
+    }
+  }
+
+  // 南环
+  const oneRingSouthSeat = [2, 0, -2, -4, -6, -8];
+  for (let i = 0; i < 3; i++) {
+    for (let j = 0; j < oneRingSouthSeat.length; j++) {
+      const value = oneRingSouthSeat[j]
+      let seatX = (startGridX + value) * gridSize;
+      let seatY = (startGridY + (4 + (i * 2))) * gridSize;
+
+      drawPlayerSeat(ctx, 'south', seatX, seatY, i, j)
+    }
+  }
+
+  // 西环
+  const oneRingWestSeat = [2, 0, -2, -4, -6, -8];
+  for (let i = 0; i < 3; i++) {
+    for (let j = 0; j < oneRingWestSeat.length; j++) {
+      const value = oneRingWestSeat[j]
+      let seatX = (startGridX - (3 + (i * 2))) * gridSize;
+      let seatY = (startGridY + value) * gridSize;
+
+      drawPlayerSeat(ctx, 'west', seatX, seatY, i, j)
+    }
+  }
+}
+
+// 绘制地图上的标志
+const drawPlayerSeat = (ctx, key, seatX, seatY, i, j) => {
+  const keys = seatKey.get(key);
+  let label = keys.get(i + "")[j];
+
+  if (tableData.value.length >= label) {
+    label = tableData.value[label - 1].name
+  }
+
+  ctx.fillStyle = label === selectedPlayer.value?.name ? "#f00": "#fff"
+  ctx.fillRect(seatX, seatY, gridSize * 2, gridSize * 2)
+
+  ctx.lineWidth = 1
+  ctx.strokeStyle = label === selectedPlayer.value?.name ? "#f00" : "#000"
+  ctx.strokeRect(seatX, seatY, gridSize * 2, gridSize * 2)
+
+  ctx.font = '12px Arial'
+  ctx.textAlign = 'center'
+  ctx.textBaseline = 'middle'
+  ctx.fillStyle = 'black'
+  let labelX = seatX + gridSize
+  let labelY = seatY + gridSize
+
+  label = label.length > 6 ? label.substring(0, 6) + "..." : label;
+  ctx.fillText(label, labelX, labelY)
+}
+
+// 导入数据
+const handleUploadChangeJson = (fielInfo) => {
+  const reader = new FileReader();
+  reader.onload = function (e) {
+    tableData.value = JSON.parse(e.target.result);
+  };
+
+  reader.onerror = function () {
+    message.error("文件读取失败！");
+  };
+
+  reader.readAsText(fielInfo.file.file);
 }
 
 // 导出配置文件
@@ -380,8 +624,7 @@ const exportToJSON = () => {
   const blob = new Blob([jsonString], { type: 'application/json' });
   const url = URL.createObjectURL(blob);
 
-  const timestamp = new Date().toISOString().slice(0, 19).replace(/:/g, '-');
-  const filename = `export-data-${timestamp}.json`;
+  const filename = `export-data-${Date.now()}.json`;
 
   const a = document.createElement('a');
   a.href = url;
@@ -391,6 +634,39 @@ const exportToJSON = () => {
   document.body.removeChild(a);
   URL.revokeObjectURL(url);
 }
+
+// 检索玩家
+const inputChange = (val) => {
+  console.log(val);
+  if(val) {
+    seatCanvasDatum.value = seatCanvasDatum.value.filter(item => item.name.includes(val));
+  } else {
+    seatCanvasDatum.value = [...tableData.value]
+  }
+
+  drawSeatMap()
+}
+
+// 清空检索条件
+const inputClear = () => {
+  selectedPlayer.value = null
+  drawSeatMap()
+}
+
+// 选中玩家并定位
+const locatePlayerPosition = (obj) => {
+  if(!selectedPlayer.value || (selectedPlayer.value && selectedPlayer.value.name !== obj.name)) {
+    selectedPlayer.value = obj;
+  } else if(selectedPlayer.value && selectedPlayer.value.name === obj.name) {
+    selectedPlayer.value = null;
+  }
+  
+  drawSeatMap();
+}
+
+watch(tableData, () => {
+  seatCanvasDatum.value = [...tableData.value]
+}, { deep: true } );
 
 onMounted(async () => {});
 
