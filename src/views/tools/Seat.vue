@@ -13,6 +13,7 @@
         <n-button>导入配置</n-button>
       </n-upload>
       <n-button @click="exportToJSON" style="margin-right: 10px; width: 85px;">导出配置</n-button>
+      <n-button @click="exportToJSON" style="margin-right: 10px; width: 85px;">座次标识</n-button>
     </div>
     <div style="display: flex; align-items: center; padding-bottom: 10px;">
       <n-progress style="flex: 1;" type="line" :percentage="percentage" indicator-placement="inside" />
@@ -78,11 +79,11 @@
             <n-input placeholder="搜索" style="margin-bottom: 8px;" @input="inputChange" @clear="inputClear" clearable />
             <div style="overflow-y: auto; height: 92vh;">
               <n-list hoverable clickable>
-                <n-list-item v-for="obj in seatCanvasDatum" @click="locatePlayerPosition(obj)">
+                <n-list-item v-for="(obj, index) in seatCanvasDatum" @click="locatePlayerPosition(obj)" :key="index">
                   <div style="display: flex;">
                     <div v-if="selectedPlayer && selectedPlayer.name === obj.name" style="padding-right: 10px;">✅</div>
                     <div style="display: flex; justify-content: space-between; width: 100%;">
-                      <div>{{ obj.name }}</div>
+                      <div>{{ index + 1 }}、{{ obj.name }}</div>
                       <div>{{ obj[selectSortField] }}</div>
                     </div>
                   </div>
@@ -215,24 +216,24 @@ const columns = [
 
 const seatKey = new Map([
   ['north', new Map([
-    ['0', [5, 1, 9, 25, 45, 61]],
-    ['1', [17, 13, 21, 29, 53, 65]],
-    ['2', [37, 33, 41, 49, 57, 69]],
+    ['0', [5,   1,  9,  25, 45, 61]],
+    ['1', [17,  13, 21, 29, 53, 65]],
+    ['2', [37,  33, 41, 49, 57, 69]],
   ])],
   ['east', new Map([
-    ['0', [6, 2, 10, 26, 46, 62]],
-    ['1', [18, 14, 22, 30, 54, 66]],
-    ['2', [38, 34, 42, 50, 58, 70]],
+    ['0', [6,   2,  10, 26, 46, 62]],
+    ['1', [18,  14, 22, 30, 54, 66]],
+    ['2', [38,  34, 42, 50, 58, 70]],
   ])],
   ['south', new Map([
-    ['0', [7, 3, 11, 27, 47, 63]],
-    ['1', [19, 15, 23, 31, 55, 67]],
-    ['2', [39, 35, 43, 51, 59, 71]],
+    ['0', [7,   3,  11, 27, 47, 63]],
+    ['1', [19,  15, 23, 31, 55, 67]],
+    ['2', [39,  35, 43, 51, 59, 71]],
   ])],
   ['west', new Map([
-    ['0', [8, 4, 12, 28, 48, 64]],
-    ['1', [20, 16, 24, 32, 56, 68]],
-    ['2', [40, 36, 44, 52, 60, 72]],
+    ['0', [8,   4,  12, 28, 48, 64]],
+    ['1', [20,  16, 24, 32, 56, 68]],
+    ['2', [40,  36, 44, 52, 60, 72]],
   ])],
 ]);
 
@@ -283,10 +284,12 @@ const selectSortField = ref('');
 const showSelectSortFieldModal = ref(false);
 // 是否显示座位图
 const showSeatCanvasModal = ref(false);
-// 座位图数据
+// 排序后的数据
 const seatCanvasDatum = ref({});
 // 当前选中的玩家
 const selectedPlayer = ref(null);
+// canvas上的数据
+const playerSeatDatum = ref({});
 // 地图对象
 const seatCanvas = ref(null);
 
@@ -454,6 +457,8 @@ const selectSortFieldPositive = async () => {
     if (x === y) return 0;
     return x > y ? -1 : 1;
   });
+
+  playerSeatDatum.value = [...seatCanvasDatum.value]
 
   showSeatCanvasModal.value = true;
   await nextTick();
@@ -624,11 +629,9 @@ const drawSeatMap = () => {
 const drawPlayerSeat = (ctx, key, seatX, seatY, i, j) => {
   const keys = seatKey.get(key);
   let label = keys.get(i + "")[j];
-  console.log("label(index) => " + label)
 
-  if (tableData.value.length >= label) {
-    label = tableData.value[label - 1].name
-    console.log("label => " + label)
+  if (playerSeatDatum.value.length >= label) {
+    label = playerSeatDatum.value[label - 1].name
   }
 
   ctx.fillStyle = label === selectedPlayer.value?.name ? "#f00" : "#fff"
@@ -686,7 +689,7 @@ const inputChange = (val) => {
   if (val) {
     seatCanvasDatum.value = seatCanvasDatum.value.filter(item => item.name.includes(val));
   } else {
-    seatCanvasDatum.value = [...tableData.value]
+    seatCanvasDatum.value = [...playerSeatDatum.value]
   }
 
   drawSeatMap()
