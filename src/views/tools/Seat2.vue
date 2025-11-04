@@ -433,8 +433,8 @@ const drawSeat = () => {
   // ============================
   // 绘制 3x3 的方框（精准对齐网格）
   // ============================
-  const boxWidth = boxGridWidth * gridSize     // 3 * 40 = 120
-  const boxHeight = boxGridHeight * gridSize   // 3 * 40 = 120
+  const boxWidth = boxGridWidth * gridSize
+  const boxHeight = boxGridHeight * gridSize
 
   // 画布中心点坐标
   const canvasCenterX = canvas.width / 2
