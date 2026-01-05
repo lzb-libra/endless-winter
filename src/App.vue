@@ -90,19 +90,19 @@ const menuOptions = [
 			),
 		key: "activity",
 	},
-	{
-		label: () =>
-			h(
-				RouterLink,
-				{
-					to: {
-						name: "Chat",
-					},
-				},
-				{ default: () => "图表" }
-			),
-		key: "chat",
-	},
+	// {
+	// 	label: () =>
+	// 		h(
+	// 			RouterLink,
+	// 			{
+	// 				to: {
+	// 					name: "Chat",
+	// 				},
+	// 			},
+	// 			{ default: () => "图表" }
+	// 		),
+	// 	key: "chat",
+	// },
 	{
 		label: () =>
 			h(

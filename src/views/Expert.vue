@@ -73,15 +73,18 @@
             </n-gi>
             <n-gi>
                 <n-card title="好感度">
-                    <n-timeline>
+                    <n-timeline :icon-size="20">
                         <n-timeline-item v-for="(item3, index3) in showExpertDetail.likability" :key="index3" type="warning">
+                            <!-- <template #icon>
+                                <n-image style="height: 35px; width: 35px;" :src="renderLikabilityIcon(item3)" preview-disabled />
+                            </template> -->
                             <template #header>
                                 <div style="font-size: large; font-weight: bold;">Lv {{ item3.level }} {{ item3.desc }}</div>
                             </template>
                             <template #default>
                                 <div style="display: flex; margin-top: 20px; border-radius: 10px;">
                                     <div style="background: linear-gradient(to right, #ff7e5f, #feb47b); padding: 15px; border-top-left-radius: 9px; border-bottom-left-radius: 9px;">
-                                        <n-image class="expert_likability_img" :src="renderLikabilityIcon(item3)" preview-disabled />
+                                        <n-image class="expert_likability_img" :src="renderLikabilityImg(item3)" preview-disabled />
                                     </div>
                                     <div style="padding-left: 10px; display: flex; flex-direction: column; justify-content: center; font-size: large; padding-left: 20px; background-color: bisque; width: 100%; color: black; border-top-right-radius: 9px; border-bottom-right-radius: 9px;">
                                         <div v-html="item3.effect"></div>
@@ -148,13 +151,25 @@ const renderSkill = (index) => {
 const renderLikabilityIcon = (item) => {
     if(!showExpertDetail.value) return;
 
-    if(item.level === '1' || item.level === '10' || item.level === '20' || item.level === '30' || item.level === '40') {
+    if(item.level === '1' || item.level === '10' || item.level === '20' || item.level === '30' || item.level === '40' || item.level === '50' ) {
+        const imgUrl = `${import.meta.env.BASE_URL}images/expert/likability_${item.level}.png`;
+        return new URL(imgUrl, import.meta.url).href;
+    } else {
+        const imgUrl = `${import.meta.env.BASE_URL}images/expert/likability_1.png`;
+        return new URL(imgUrl, import.meta.url).href;
+    }   
+}
+
+const renderLikabilityImg = (item) => {
+    if(!showExpertDetail.value) return;
+
+    if(item.level === '1' || item.level === '10' || item.level === '20' || item.level === '30' || item.level === '40' || item.level === '50' || item.level === '60' || item.level === '70' || item.level === '80' ) {
         const imgUrl = `${import.meta.env.BASE_URL}images/expert/likability_${item.level}_icon.png`;
         return new URL(imgUrl, import.meta.url).href;
     } else {
         const imgUrl = `${import.meta.env.BASE_URL}images/expert/likability_1_icon.png`;
         return new URL(imgUrl, import.meta.url).href;
-    }
+    }   
 }
 
 onMounted(() => {
@@ -183,6 +198,10 @@ onMounted(() => {
 .expert_likability_img {
     width: 50px;
     height: 50px;
+}
+
+:deep(.n-timeline-item-timeline__line) {
+    background-color: yellow !important;
 }
 
 @media (min-width: 640px) { 

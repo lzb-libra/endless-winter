@@ -1,19 +1,19 @@
 <template>
   <div>
     <div style="display: flex; padding-bottom: 10px;">
-      <n-upload :default-upload="false" :multiple="true" :show-retry-button="true" :show-file-list="false"
-        accept="image/*" v-model:file-list="fileList" @change="handleUploadChange"
-        style="margin-right: 10px; width: 85px;">
+      <n-input v-model:value="allianceName" type="text" placeholder="请输入联盟简称，区分大小写" style="margin-right: 10px; width: 250px;" />
+      <n-upload :default-upload="false" :multiple="true" :show-retry-button="true" :show-file-list="false" @before-upload="onBeforeUpload"
+        accept="image/*" v-model:file-list="fileList" @change="handleUploadChange" style="margin-right: 10px; width: 85px;">
         <n-button>上传图片</n-button>
       </n-upload>
-      <n-button @click="showPlayerSeatChart" style="margin-right: 10px; width: 85px;">座位地图</n-button>
+      <n-button @click="() => showSeatIndexModal = !showSeatIndexModal" style="margin-right: 10px; width: 85px;">座次标识</n-button>
+      <n-button @click="showSelectSortFieldModal = !showSelectSortFieldModal" style="margin-right: 10px; width: 85px;">座位地图</n-button>
       <n-upload :default-upload="false" :multiple="false" :show-retry-button="true" :show-file-list="false"
         accept=".json" v-model:file-list="fileList" @change="handleUploadChangeJson"
         style="margin-right: 10px; width: 85px;">
         <n-button>导入配置</n-button>
       </n-upload>
       <n-button @click="exportToJSON" style="margin-right: 10px; width: 85px;">导出配置</n-button>
-      <n-button @click="exportToJSON" style="margin-right: 10px; width: 85px;">座次标识</n-button>
     </div>
     <div style="display: flex; align-items: center; padding-bottom: 10px;">
       <n-progress style="flex: 1;" type="line" :percentage="percentage" indicator-placement="inside" />
@@ -101,13 +101,116 @@
       @negative-click="showSelectSortFieldModal = !showSelectSortFieldModal">
       <n-select v-model:value="selectSortField" :options="selectSortFieldOptions" placeholder="请选择" />
     </n-modal>
+
+    <n-modal v-model:show="showSeatIndexModal" preset="dialog" title="自定义座位顺序表" style="width: 650px;"
+      @negative-click="showSeatIndexModal = !showSeatIndexModal"
+    >
+      <table>
+        <tbody>
+          <tr>
+            <td><div class="player-seat-index" contenteditable="true" @blur="updateContent($event, 'west', 2, 5)">{{ seatKey.get('west').get('2')[5] }}</div></td>
+            <td><div class="player-seat-index" contenteditable="true" @blur="updateContent($event, 'west', 1, 5)">{{ seatKey.get('west').get('1')[5] }}</div></td>
+            <td><div class="player-seat-index" contenteditable="true" @blur="updateContent($event, 'west', 0, 5)">{{ seatKey.get('west').get('0')[5] }}</div></td>
+            <td><div class="player-seat-index" contenteditable="true" @blur="updateContent($event, 'north', 2, 0)">{{ seatKey.get('north').get('2')[0] }}</div></td>
+            <td><div class="player-seat-index" contenteditable="true" @blur="updateContent($event, 'north', 2, 1)">{{ seatKey.get('north').get('2')[1] }}</div></td>
+            <td><div class="player-seat-index" contenteditable="true" @blur="updateContent($event, 'north', 2, 2)">{{ seatKey.get('north').get('2')[2] }}</div></td>
+            <td><div class="player-seat-index" contenteditable="true" @blur="updateContent($event, 'north', 2, 3)">{{ seatKey.get('north').get('2')[3] }}</div></td>
+            <td><div class="player-seat-index" contenteditable="true" @blur="updateContent($event, 'north', 2, 4)">{{ seatKey.get('north').get('2')[4] }}</div></td>
+            <td><div class="player-seat-index" contenteditable="true" @blur="updateContent($event, 'north', 2, 5)">{{ seatKey.get('north').get('2')[5] }}</div></td>
+          </tr>
+          <tr>
+            <td><div class="player-seat-index" contenteditable="true" @blur="updateContent($event, 'west', 2, 4)">{{ seatKey.get('west').get('2')[4] }}</div></td>
+            <td><div class="player-seat-index" contenteditable="true" @blur="updateContent($event, 'west', 1, 4)">{{ seatKey.get('west').get('1')[4] }}</div></td>
+            <td><div class="player-seat-index" contenteditable="true" @blur="updateContent($event, 'west', 0, 4)">{{ seatKey.get('west').get('0')[4] }}</div></td>
+            <td><div class="player-seat-index" contenteditable="true" @blur="updateContent($event, 'north', 1, 0)">{{ seatKey.get('north').get('1')[0] }}</div></td>
+            <td><div class="player-seat-index" contenteditable="true" @blur="updateContent($event, 'north', 1, 1)">{{ seatKey.get('north').get('1')[1] }}</div></td>
+            <td><div class="player-seat-index" contenteditable="true" @blur="updateContent($event, 'north', 1, 2)">{{ seatKey.get('north').get('1')[2] }}</div></td>
+            <td><div class="player-seat-index" contenteditable="true" @blur="updateContent($event, 'north', 1, 3)">{{ seatKey.get('north').get('1')[3] }}</div></td>
+            <td><div class="player-seat-index" contenteditable="true" @blur="updateContent($event, 'north', 1, 4)">{{ seatKey.get('north').get('1')[4] }}</div></td>
+            <td><div class="player-seat-index" contenteditable="true" @blur="updateContent($event, 'north', 1, 5)">{{ seatKey.get('north').get('1')[5] }}</div></td>
+          </tr>
+          <tr>
+            <td><div class="player-seat-index" contenteditable="true" @blur="updateContent($event, 'west', 2, 3)">{{ seatKey.get('west').get('2')[3] }}</div></td>
+            <td><div class="player-seat-index" contenteditable="true" @blur="updateContent($event, 'west', 1, 3)">{{ seatKey.get('west').get('1')[3] }}</div></td>
+            <td><div class="player-seat-index" contenteditable="true" @blur="updateContent($event, 'west', 0, 3)">{{ seatKey.get('west').get('0')[3] }}</div></td>
+            <td><div class="player-seat-index" contenteditable="true" @blur="updateContent($event, 'north', 0, 0)">{{ seatKey.get('north').get('0')[0] }}</div></td>
+            <td><div class="player-seat-index" contenteditable="true" @blur="updateContent($event, 'north', 0, 1)">{{ seatKey.get('north').get('0')[1] }}</div></td>
+            <td><div class="player-seat-index" contenteditable="true" @blur="updateContent($event, 'north', 0, 2)">{{ seatKey.get('north').get('0')[2] }}</div></td>
+            <td><div class="player-seat-index" contenteditable="true" @blur="updateContent($event, 'north', 0, 3)">{{ seatKey.get('north').get('0')[3] }}</div></td>
+            <td><div class="player-seat-index" contenteditable="true" @blur="updateContent($event, 'north', 0, 4)">{{ seatKey.get('north').get('0')[4] }}</div></td>
+            <td><div class="player-seat-index" contenteditable="true" @blur="updateContent($event, 'north', 0, 5)">{{ seatKey.get('north').get('0')[5] }}</div></td>
+          </tr>
+          <tr>
+            <td><div class="player-seat-index" contenteditable="true" @blur="updateContent($event, 'west', 2, 2)">{{ seatKey.get('west').get('2')[2] }}</div></td>
+            <td><div class="player-seat-index" contenteditable="true" @blur="updateContent($event, 'west', 1, 2)">{{ seatKey.get('west').get('1')[2] }}</div></td>
+            <td><div class="player-seat-index" contenteditable="true" @blur="updateContent($event, 'west', 0, 2)">{{ seatKey.get('west').get('0')[2] }}</div></td>
+            <td colspan="3" rowspan="3" class="big-center-square">
+              <span style="font-size: 5em;">🐻</span>
+            </td>
+            <td><div class="player-seat-index" contenteditable="true" @blur="updateContent($event, 'east', 0, 0)">{{ seatKey.get('east').get('0')[0] }}</div></td>
+            <td><div class="player-seat-index" contenteditable="true" @blur="updateContent($event, 'east', 1, 0)">{{ seatKey.get('east').get('1')[0] }}</div></td>
+            <td><div class="player-seat-index" contenteditable="true" @blur="updateContent($event, 'east', 2, 0)">{{ seatKey.get('east').get('2')[0] }}</div></td>
+          </tr>
+          <tr>
+            <td><div class="player-seat-index" contenteditable="true" @blur="updateContent($event, 'west', 2, 1)">{{ seatKey.get('west').get('2')[1] }}</div></td>
+            <td><div class="player-seat-index" contenteditable="true" @blur="updateContent($event, 'west', 1, 1)">{{ seatKey.get('west').get('1')[1] }}</div></td>
+            <td><div class="player-seat-index" contenteditable="true" @blur="updateContent($event, 'west', 0, 1)">{{ seatKey.get('west').get('0')[1] }}</div></td>
+            <td><div class="player-seat-index" contenteditable="true" @blur="updateContent($event, 'east', 0, 1)">{{ seatKey.get('east').get('0')[1] }}</div></td>
+            <td><div class="player-seat-index" contenteditable="true" @blur="updateContent($event, 'east', 1, 1)">{{ seatKey.get('east').get('1')[1] }}</div></td>
+            <td><div class="player-seat-index" contenteditable="true" @blur="updateContent($event, 'east', 2, 1)">{{ seatKey.get('east').get('2')[1] }}</div></td>
+          </tr>
+          <tr>
+            <td><div class="player-seat-index" contenteditable="true" @blur="updateContent($event, 'west', 2, 0)">{{ seatKey.get('west').get('2')[0] }}</div></td>
+            <td><div class="player-seat-index" contenteditable="true" @blur="updateContent($event, 'west', 1, 0)">{{ seatKey.get('west').get('1')[0] }}</div></td>
+            <td><div class="player-seat-index" contenteditable="true" @blur="updateContent($event, 'west', 0, 0)">{{ seatKey.get('west').get('0')[0] }}</div></td>
+            <td><div class="player-seat-index" contenteditable="true" @blur="updateContent($event, 'east', 0, 2)">{{ seatKey.get('east').get('0')[2] }}</div></td>
+            <td><div class="player-seat-index" contenteditable="true" @blur="updateContent($event, 'east', 1, 2)">{{ seatKey.get('east').get('1')[2] }}</div></td>
+            <td><div class="player-seat-index" contenteditable="true" @blur="updateContent($event, 'east', 2, 2)">{{ seatKey.get('east').get('2')[2] }}</div></td>
+          </tr>
+          <tr>
+            <td><div class="player-seat-index" contenteditable="true" @blur="updateContent($event, 'south', 0, 5)">{{ seatKey.get('south').get('0')[5] }}</div></td>
+            <td><div class="player-seat-index" contenteditable="true" @blur="updateContent($event, 'south', 0, 4)">{{ seatKey.get('south').get('0')[4] }}</div></td>
+            <td><div class="player-seat-index" contenteditable="true" @blur="updateContent($event, 'south', 0, 3)">{{ seatKey.get('south').get('0')[3] }}</div></td>
+            <td><div class="player-seat-index" contenteditable="true" @blur="updateContent($event, 'south', 0, 2)">{{ seatKey.get('south').get('0')[2] }}</div></td>
+            <td><div class="player-seat-index" contenteditable="true" @blur="updateContent($event, 'south', 0, 1)">{{ seatKey.get('south').get('0')[1] }}</div></td>
+            <td><div class="player-seat-index" contenteditable="true" @blur="updateContent($event, 'south', 0, 0)">{{ seatKey.get('south').get('0')[0] }}</div></td>
+            <td><div class="player-seat-index" contenteditable="true" @blur="updateContent($event, 'east', 0, 3)">{{ seatKey.get('east').get('0')[3] }}</div></td>
+            <td><div class="player-seat-index" contenteditable="true" @blur="updateContent($event, 'east', 1, 3)">{{ seatKey.get('east').get('1')[3] }}</div></td>
+            <td><div class="player-seat-index" contenteditable="true" @blur="updateContent($event, 'east', 2, 3)">{{ seatKey.get('east').get('2')[3] }}</div></td>
+          </tr>
+          <tr>
+            <td><div class="player-seat-index" contenteditable="true" @blur="updateContent($event, 'south', 1, 5)">{{ seatKey.get('south').get('1')[5] }}</div></td>
+            <td><div class="player-seat-index" contenteditable="true" @blur="updateContent($event, 'south', 1, 4)">{{ seatKey.get('south').get('1')[4] }}</div></td>
+            <td><div class="player-seat-index" contenteditable="true" @blur="updateContent($event, 'south', 1, 3)">{{ seatKey.get('south').get('1')[3] }}</div></td>
+            <td><div class="player-seat-index" contenteditable="true" @blur="updateContent($event, 'south', 1, 2)">{{ seatKey.get('south').get('1')[2] }}</div></td>
+            <td><div class="player-seat-index" contenteditable="true" @blur="updateContent($event, 'south', 1, 1)">{{ seatKey.get('south').get('1')[1] }}</div></td>
+            <td><div class="player-seat-index" contenteditable="true" @blur="updateContent($event, 'south', 1, 0)">{{ seatKey.get('south').get('1')[0] }}</div></td>
+            <td><div class="player-seat-index" contenteditable="true" @blur="updateContent($event, 'east', 0, 4)">{{ seatKey.get('east').get('0')[4] }}</div></td>
+            <td><div class="player-seat-index" contenteditable="true" @blur="updateContent($event, 'east', 1, 4)">{{ seatKey.get('east').get('1')[4] }}</div></td>
+            <td><div class="player-seat-index" contenteditable="true" @blur="updateContent($event, 'east', 2, 4)">{{ seatKey.get('east').get('2')[4] }}</div></td>
+          </tr>
+          <tr>
+            <td><div class="player-seat-index" contenteditable="true" @blur="updateContent($event, 'south', 2, 5)">{{ seatKey.get('south').get('2')[5] }}</div></td>
+            <td><div class="player-seat-index" contenteditable="true" @blur="updateContent($event, 'south', 2, 4)">{{ seatKey.get('south').get('2')[4] }}</div></td>
+            <td><div class="player-seat-index" contenteditable="true" @blur="updateContent($event, 'south', 2, 3)">{{ seatKey.get('south').get('2')[3] }}</div></td>
+            <td><div class="player-seat-index" contenteditable="true" @blur="updateContent($event, 'south', 2, 2)">{{ seatKey.get('south').get('2')[2] }}</div></td>
+            <td><div class="player-seat-index" contenteditable="true" @blur="updateContent($event, 'south', 2, 1)">{{ seatKey.get('south').get('2')[1] }}</div></td>
+            <td><div class="player-seat-index" contenteditable="true" @blur="updateContent($event, 'south', 2, 0)">{{ seatKey.get('south').get('2')[0] }}</div></td>
+            <td><div class="player-seat-index" contenteditable="true" @blur="updateContent($event, 'east', 0, 5)">{{ seatKey.get('east').get('0')[5] }}</div></td>
+            <td><div class="player-seat-index" contenteditable="true" @blur="updateContent($event, 'east', 1, 5)">{{ seatKey.get('east').get('1')[5] }}</div></td>
+            <td><div class="player-seat-index" contenteditable="true" @blur="updateContent($event, 'east', 2, 5)">{{ seatKey.get('east').get('2')[5] }}</div></td>
+          </tr>
+        </tbody>
+      </table>
+    </n-modal>
   </div>
 </template>
 
 <script setup>
-import { ref, onMounted, onUnmounted, watch, nextTick, h, reactive } from 'vue';
+import { ref, onMounted, onUnmounted, watch, nextTick, h, reactive, render } from 'vue';
 import { createWorker } from 'tesseract.js';
 import { NButton, useMessage } from 'naive-ui';
+import { color } from 'echarts';
 
 const message = useMessage();
 
@@ -155,87 +258,216 @@ const columns = [
   {
     title: '盾兵攻击力',
     key: "dbgjl",
-    sorter: (row1, row2) => row1.dbgjl - row2.dbgjl
+    sorter: (row1, row2) => row1.dbgjl - row2.dbgjl,
+    render(row) {
+      return h(
+        'span',
+        {
+          style: {
+            color: row.dbgjl && !isNaN(row.dbgjl) ? '' : 'red'
+          }
+        },
+        row.dbgjl
+      )
+    }
   },
   {
     title: '盾兵防御力',
     key: "dbfyl",
-    ssorter: (row1, row2) => row1.dbfyl - row2.dbfyl
+    ssorter: (row1, row2) => row1.dbfyl - row2.dbfyl,
+    render(row) {
+      return h(
+        'span',
+        {
+          style: {
+            color: row.dbfyl && !isNaN(row.dbfyl) ? '' : 'red'
+          }
+        },
+        row.dbfyl
+      )
+    }
   },
   {
     title: '盾兵穿透力',
     key: "dbctl",
-    sorter: (row1, row2) => row1.dbctl - row2.dbctl
+    sorter: (row1, row2) => row1.dbctl - row2.dbctl,
+    render(row) {
+      return h(
+        'span',
+        {
+          style: {
+            color: row.dbctl && !isNaN(row.dbctl) ? '' : 'red'
+          }
+        },
+        row.dbctl
+      )
+    }
   },
   {
     title: '盾兵生命力',
     key: "dbsml",
-    sorter: (row1, row2) => row1.dbsml - row2.dbsml
+    sorter: (row1, row2) => row1.dbsml - row2.dbsml,
+    render(row) {
+      return h(
+        'span',
+        {
+          style: {
+            color: row.dbsml && !isNaN(row.dbsml) ? '' : 'red'
+          }
+        },
+        row.dbsml
+      )
+    }
   },
   {
     title: '矛兵攻击力',
     key: "mbgjl",
-    sorter: (row1, row2) => row1.mbgjl - row2.mbgjl
+    sorter: (row1, row2) => row1.mbgjl - row2.mbgjl,
+    render(row) {
+      return h(
+        'span',
+        {
+          style: {
+            color: row.mbgjl && !isNaN(row.mbgjl) ? '' : 'red'
+          }
+        },
+        row.mbgjl
+      )
+    }
   },
   {
     title: '矛兵防御力',
     key: "mbfyl",
-    sorter: (row1, row2) => row1.mbfyl - row2.mbfyl
+    sorter: (row1, row2) => row1.mbfyl - row2.mbfyl,
+    render(row) {
+      return h(
+        'span',
+        {
+          style: {
+            color: row.mbfyl && !isNaN(row.mbfyl) ? '' : 'red'
+          }
+        },
+        row.mbfyl
+      )
+    }
   },
   {
     title: '矛兵穿透力',
     key: "mbctl",
-    sorter: (row1, row2) => row1.mbctl - row2.mbctl
+    sorter: (row1, row2) => row1.mbctl - row2.mbctl,
+    render(row) {
+      return h(
+        'span',
+        {
+          style: {
+            color: row.mbctl && !isNaN(row.mbctl) ? '' : 'red'
+          }
+        },
+        row.mbctl
+      )
+    }
   },
   {
     title: '矛兵生命力',
     key: "mbsml",
-    sorter: (row1, row2) => row1.mbsml - row2.mbsml
+    sorter: (row1, row2) => row1.mbsml - row2.mbsml,
+    render(row) {
+      return h(
+        'span',
+        {
+          style: {
+            color: row.mbsml && !isNaN(row.mbsml) ? '' : 'red'
+          }
+        },
+        row.mbsml
+      )
+    }
   },
   {
     title: '射手攻击力',
     key: "ssgjl",
-    sorter: (row1, row2) => row1.ssgjl - row2.ssgjl
+    sorter: (row1, row2) => row1.ssgjl - row2.ssgjl,
+    render(row) {
+      return h(
+        'span',
+        {
+          style: {
+            color: row.ssgjl && !isNaN(row.ssgjl) ? '' : 'red'
+          }
+        },
+        row.ssgjl
+      )
+    }
   },
   {
     title: '射手防御力',
     key: "ssfyl",
-    sorter: (row1, row2) => row1.ssfyl - row2.ssfyl
+    sorter: (row1, row2) => row1.ssfyl - row2.ssfyl,
+    render(row) {
+      return h(
+        'span',
+        {
+          style: {
+            color: row.ssfyl && !isNaN(row.ssfyl) ? '' : 'red'
+          }
+        },
+        row.ssfyl
+      )
+    }
   },
   {
     title: '射手穿透力',
     key: "ssctl",
-    sorter: (row1, row2) => row1.ssctl - row2.ssctl
+    sorter: (row1, row2) => row1.ssctl - row2.ssctl,
+    render(row) {
+      return h(
+        'span',
+        {
+          style: {
+            color: row.ssctl && !isNaN(row.ssctl) ? '' : 'red'
+          }
+        },
+        row.ssctl
+      )
+    }
   },
   {
     title: '射手生命力',
     key: "sssml",
-    sorter: (row1, row2) => row1.sssml - row2.sssml
+    sorter: (row1, row2) => row1.sssml - row2.sssml,
+    render(row) {
+      return h(
+        'span',
+        {
+          style: {
+            color: row.sssml && !isNaN(row.sssml) ? '' : 'red'
+          }
+        },
+        row.sssml
+      )
+    }
+  },
+  {
+    title: '操作',
+    key: 'actions',
+    render(row) {
+      return h(
+        NButton,
+        {
+          size: 'small',
+          onClick: () => tableData.value = tableData.value.filter(item => item.name !== row.name)
+        },
+        { default: () => '删除' }
+      )
+    }
   }
 ]
 
-const seatKey = new Map([
-  ['north', new Map([
-    ['0', [5,   1,  9,  25, 45, 61]],
-    ['1', [17,  13, 21, 29, 53, 65]],
-    ['2', [37,  33, 41, 49, 57, 69]],
-  ])],
-  ['east', new Map([
-    ['0', [6,   2,  10, 26, 46, 62]],
-    ['1', [18,  14, 22, 30, 54, 66]],
-    ['2', [38,  34, 42, 50, 58, 70]],
-  ])],
-  ['south', new Map([
-    ['0', [7,   3,  11, 27, 47, 63]],
-    ['1', [19,  15, 23, 31, 55, 67]],
-    ['2', [39,  35, 43, 51, 59, 71]],
-  ])],
-  ['west', new Map([
-    ['0', [8,   4,  12, 28, 48, 64]],
-    ['1', [20,  16, 24, 32, 56, 68]],
-    ['2', [40,  36, 44, 52, 60, 72]],
-  ])],
-]);
+const indexColor = new Map([
+  ['0', ["#E74C3C","#3498DB","#2ECC71","#F39C12","#9B59B6","#1ABC9C"]],
+  ['1', ["#E67E22","#34495E","#F1C40F","#E91E63","#00BCD4","#FF5722"]],
+  ['2', ["#607D8B","#FF9800","#4CAF50","#9C27B0","#FFEB3B","#673AB7"]]
+])
 
 // 画布网格参数
 const gridSize = 50;      // 每个格子的宽高（像素）
@@ -263,6 +495,30 @@ const pagination = reactive({
     pagination.page = 1
   }
 });
+// 座位玩家索引
+const seatKey = ref(new Map([
+  ['north', new Map([
+    ['0', [5,   1,  9,  25, 45, 61]],
+    ['1', [17,  13, 21, 29, 53, 65]],
+    ['2', [37,  33, 41, 49, 57, 69]],
+  ])],
+  ['east', new Map([
+    ['0', [6,   2,  10, 26, 46, 62]],
+    ['1', [18,  14, 22, 30, 54, 66]],
+    ['2', [38,  34, 42, 50, 58, 70]],
+  ])],
+  ['south', new Map([
+    ['0', [7,   3,  11, 27, 47, 63]],
+    ['1', [19,  15, 23, 31, 55, 67]],
+    ['2', [39,  35, 43, 51, 59, 71]],
+  ])],
+  ['west', new Map([
+    ['0', [8,   4,  12, 28, 48, 64]],
+    ['1', [20,  16, 24, 32, 56, 68]],
+    ['2', [40,  36, 44, 52, 60, 72]],
+  ])],
+]));
+const allianceName = ref()
 // 表格数据
 const tableData = ref([]);
 // 上传的文件对象
@@ -281,7 +537,9 @@ const showTableDetail = ref({});
 const showTableDetailModal = ref(false);
 // 选择的排序方式
 const selectSortField = ref('');
+// 选择的排序方式的弹窗
 const showSelectSortFieldModal = ref(false);
+const showSeatIndexModal = ref(false);
 // 是否显示座位图
 const showSeatCanvasModal = ref(false);
 // 排序后的数据
@@ -292,6 +550,14 @@ const selectedPlayer = ref(null);
 const playerSeatDatum = ref({});
 // 地图对象
 const seatCanvas = ref(null);
+
+const onBeforeUpload = (file, fileList) => {
+  if(!allianceName.value) {
+    message.error("请先输入联盟简称，区分大小写。");
+    return false;
+  }
+  return true;
+}
 
 // 图片上传
 const handleUploadChange = async (fielInfo) => {
@@ -370,14 +636,14 @@ const parsePlayerData = (result, file) => {
 
   const playerData = {};
   const lines = result.text.split(/\r?\n/);
+  const regex = new RegExp(`^.*?【${allianceName.value}】`, 'i');
   for (const item of lines) {
-    if (!playerData['name'] && (item.includes('QGD') || item.includes('FUN'))) {
-      let cleaned = item.replace(/^.*?【QGD】/i, '').replace(/^.*?【FUN】/i, '');
-      cleaned = cleaned.replace(/^.*?\[QGD\]/i, '').replace(/^.*?\[FUN\]/i, '');
+    if (!playerData['name'] && item.includes(allianceName.value)) {
+      let cleaned = item.replace(regex, '');
+      cleaned = cleaned.replace(regex, '');
       cleaned = cleaned.split(' ').filter(item => item.trim() !== '');
       playerData['name'] = cleaned[0];
     }
-    if (!playerData['name']) playerData['name'] = file.name.replace('.png', '');
 
     if (item.includes('盾兵攻')) {
       const cleaned = item.split(' ').filter(item => item.trim() !== '')
@@ -430,6 +696,7 @@ const parsePlayerData = (result, file) => {
       playerData['sssml'] = cleanPercent(cleaned[1]);
     }
   }
+  if (!playerData['name']) playerData['name'] = file.name.replace('.png', '');
 
   return playerData;
 }
@@ -466,14 +733,9 @@ const selectSortFieldPositive = async () => {
   drawSeatMap();
 }
 
-// 展示座位布局图
-const showPlayerSeatChart = () => {
-  // if (tableData.value.length === 0) {
-  //   message.warning("请先上传玩家数据!!!");
-  //   return;
-  // }
-
-  showSelectSortFieldModal.value = true;
+const updateContent = (event, dir, rings, index) => {
+  // console.log(event.target.innerHTML, dir, rings, index);
+  seatKey.value.get(dir).get(rings + "")[index] = event.target.innerHTML;
 }
 
 // 绘制座位地图
@@ -627,14 +889,14 @@ const drawSeatMap = () => {
 
 // 绘制地图上的标志
 const drawPlayerSeat = (ctx, key, seatX, seatY, i, j) => {
-  const keys = seatKey.get(key);
+  const keys = seatKey.value.get(key);
   let label = keys.get(i + "")[j];
 
   if (playerSeatDatum.value.length >= label) {
     label = playerSeatDatum.value[label - 1].name
   }
 
-  ctx.fillStyle = label === selectedPlayer.value?.name ? "#f00" : "#fff"
+  ctx.fillStyle = label === selectedPlayer.value?.name ? "#f00" : indexColor.get(i + "")[j]
   ctx.fillRect(seatX, seatY, gridSize * 2, gridSize * 2)
 
   ctx.lineWidth = 1
@@ -652,11 +914,24 @@ const drawPlayerSeat = (ctx, key, seatX, seatY, i, j) => {
   ctx.fillText(label, labelX, labelY)
 }
 
+function objectToMap(obj) {
+  const map = new Map();
+  for (const [key, value] of Object.entries(obj)) {
+    map.set(key, typeof value === 'object' && !Array.isArray(value) ? objectToMap(value) : value);
+  }
+  return map;
+}
+
 // 导入数据
 const handleUploadChangeJson = (fielInfo) => {
+  tableData.value = [];
+
   const reader = new FileReader();
   reader.onload = function (e) {
-    tableData.value = JSON.parse(e.target.result);
+    const result = JSON.parse(e.target.result);
+
+    seatKey.value = objectToMap(result['seatIndex']);
+    tableData.value = result['tableDatum']
   };
 
   reader.onerror = function () {
@@ -666,9 +941,23 @@ const handleUploadChangeJson = (fielInfo) => {
   reader.readAsText(fielInfo.file.file);
 }
 
+function mapToObject(map) {
+  const obj = {};
+  for (const [key, value] of map) {
+    // 如果 value 仍然是 Map，递归转换
+    obj[key] = value instanceof Map ? mapToObject(value) : value;
+  }
+  return obj;
+}
+
 // 导出配置文件
 const exportToJSON = () => {
-  const jsonString = JSON.stringify(tableData.value, null, 2);
+  const result = {
+    "tableDatum": tableData.value,
+    "seatIndex": mapToObject(seatKey.value)
+  }
+
+  const jsonString = JSON.stringify(result, null, 2);
   const blob = new Blob([jsonString], { type: 'application/json' });
   const url = URL.createObjectURL(blob);
 
@@ -723,4 +1012,35 @@ onUnmounted(async () => {
 });
 </script>
 
-<style scoped></style>
+<style scoped>
+table {
+  border-collapse: collapse;
+  margin: 20px auto;
+}
+
+td {
+  width: 50px;
+  height: 50px;
+  border: 1px solid #999;
+  text-align: center;
+  vertical-align: middle;
+  font-size: 12px;
+}
+
+.player-seat-index {
+  width: 100%; 
+  height: 100%; 
+  display: flex; 
+  align-items: center; 
+  justify-content: center;
+}
+
+/* 中间大正方格样式 */
+.big-center-square {
+  background-color: rgba(0, 123, 255, 0.3);
+  border: 3px solid #007bff;
+  font-weight: bold;
+  font-size: 16px;
+  color: #0056b3;
+}
+</style>
