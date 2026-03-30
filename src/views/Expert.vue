@@ -75,9 +75,6 @@
                 <n-card title="好感度">
                     <n-timeline :icon-size="20">
                         <n-timeline-item v-for="(item3, index3) in showExpertDetail.likability" :key="index3" type="warning">
-                            <!-- <template #icon>
-                                <n-image style="height: 35px; width: 35px;" :src="renderLikabilityIcon(item3)" preview-disabled />
-                            </template> -->
                             <template #header>
                                 <div style="font-size: large; font-weight: bold;">Lv {{ item3.level }} {{ item3.desc }}</div>
                             </template>
